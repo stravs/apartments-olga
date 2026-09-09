@@ -1009,6 +1009,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   .site-actions { gap: 12px }
   .site-header .guest-guide-link { display: none }
 
+  .hero { width: calc(100% - 32px) }
   .hero-media { min-height: 0 }
   .hero-media img, .hero--empty .image-empty { height: 320px }
   .hero-card { padding: 30px 22px 34px }
