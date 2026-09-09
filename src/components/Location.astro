@@ -26,7 +26,7 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${enco
     <iframe
       src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=15&output=embed`}
       title={`${t('mapOf')} ${property.name}`}
-      loading="lazy"
+      loading="eager"
       referrerpolicy="no-referrer-when-downgrade"
       allowfullscreen
     ></iframe>
