@@ -36,15 +36,6 @@ const galleryCount = property.photos.length;
     <p>{property.description.split(/(?<=[.!?])\s/)[0]}</p>
     <div class="hero-actions">
       <a class="primary-button" href={property.bookingUrl} target="_blank" rel="noopener">{t('reserve')}</a>
-      {galleryCount > 1 && (
-        <button
-          class="hero-gallery-link"
-          type="button"
-          data-gallery-index="0"
-          data-photo-index="0"
-          aria-label={`${t('openGallery')} ${property.name}`}
-        >{t('photosCount', { count: galleryCount })}</button>
-      )}
     </div>
   </div>
 </section>

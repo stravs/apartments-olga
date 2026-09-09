@@ -8,10 +8,9 @@ import PhotoMosaic from './PhotoMosaic.astro';
 interface Props {
   unit: PropertyUnit;
   galleryIndex: number;
-  bookingUrl: string;
   locale: Locale;
 }
-const { unit, galleryIndex, bookingUrl, locale } = Astro.props;
+const { unit, galleryIndex, locale } = Astro.props;
 const t = useTranslations(locale);
 const photos = resolvePhotos(unit.photos, unit.name);
 const facts = [
@@ -22,7 +21,7 @@ const facts = [
 ].filter((fact): fact is string => Boolean(fact));
 ---
 <article class="unit-card" id={`unit-${unit.id}`}>
-  {photos.length > 0 && <PhotoMosaic {photos} {galleryIndex} label={unit.name} {locale} />}
+  {photos.length > 0 && <PhotoMosaic {photos} {galleryIndex} label={unit.name} {locale} previewCount={unit.id === 'studio-one' ? 3 : 5} mobilePreviewCount={5} />}
   <div class="unit-body">
     <div class="unit-main">
       <p class="eyebrow">{unit.type ?? t('unit')}</p>
@@ -38,7 +37,6 @@ const facts = [
           ))}
         </dl>
       )}
-      <a class="primary-button" href={unit.bookingUrl ?? bookingUrl} target="_blank" rel="noopener">{t('bookUnit')}</a>
     </div>
     <div class="unit-aside">
       {facts.length > 0 && (

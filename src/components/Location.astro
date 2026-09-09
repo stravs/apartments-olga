@@ -12,18 +12,32 @@ const location = propertyLocation(property);
 const mapQuery = property.latitude !== undefined && property.longitude !== undefined
   ? `${property.latitude},${property.longitude}`
   : location;
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
 ---
-{location && <section class="section location" id="location">
-  <div>
-    <p class="eyebrow">{t('location')}</p>
-    <h2>{property.city ?? property.country}</h2>
-    <p class="lead">{location}</p>
-    <p>{t('locationCopy')}</p>
+{location && <section class="section location" id="location" aria-labelledby="location-title">
+  <div class="location-heading">
+    <div>
+      <p class="eyebrow">{t('location')} · {property.city ?? property.country}</p>
+      <h2 id="location-title">{t('locationTitle')}</h2>
+    </div>
+    {/* <p class="lead">{t('locationCopy')}</p> */}
   </div>
-  <iframe
-    src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=15&output=embed`}
-    title={`${t('mapOf')} ${property.name}`}
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
+  <div class="location-map">
+    <iframe
+      src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=15&output=embed`}
+      title={`${t('mapOf')} ${property.name}`}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+    <div class="location-address-bar">
+      <div class="location-address">
+        <span class="location-pin" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </span>
+        <div><p>{property.name}</p><address>{location}</address></div>
+      </div>
+      <a class="primary-button" href={directionsUrl} target="_blank" rel="noopener">{t('getDirections')} <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
 </section>}

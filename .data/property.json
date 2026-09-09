@@ -6,15 +6,42 @@
   "city": "Bled",
   "country": "Slovenija",
   "photos": [
-    { "url": "/images/olga/property/99044722.jpg", "alt": "Pokrita terasa z mizo in stoli pred vhodom v nastanitev" },
-    { "url": "/images/olga/property/100538808.jpg", "alt": "Vrtna hiša Apartments Olga s tlakovanim dvoriščem in nadstrešnim vhodom" },
-    { "url": "/images/olga/property/880803222.jpg", "alt": "Terasa pod trto z mizo in pletenimi stoli ob stopnicah v vrt" },
-    { "url": "/images/olga/property/259704830.jpg", "alt": "Vrt z leseno uto in sadnimi drevesi" },
-    { "url": "/images/olga/property/259704808.jpg", "alt": "Vrtna miza s stoli v senci smreke" },
-    { "url": "/images/olga/property/880803183.jpg", "alt": "Tlakovana pot skozi vrt mimo sivke in vinske trte" },
-    { "url": "/images/olga/property/880803135.jpg", "alt": "Vrtnice in glicinija, ki se vzpenjajo ob vhodu v hišo" },
-    { "url": "/images/olga/property/259704819.jpg", "alt": "Kovinska klopca s petunijami pred hišo" },
-    { "url": "/images/olga/property/880803055.jpg", "alt": "Hortenzije in vrtnice ob beli ograji na dvorišču" }
+    {
+      "url": "/images/olga/studio/99044722.jpg",
+      "alt": "Pokrita terasa z mizo in stoli pred vhodom v nastanitev"
+    },
+    {
+      "url": "/images/olga/studio/100538808.jpg",
+      "alt": "Vrtna hiša Apartments Olga s tlakovanim dvoriščem in nadstrešnim vhodom"
+    },
+    {
+      "url": "/images/olga/1bedroom/880803222.jpg",
+      "alt": "Terasa pod trto z mizo in pletenimi stoli ob stopnicah v vrt"
+    },
+    {
+      "url": "/images/olga/studio/259704830.jpg",
+      "alt": "Vrt z leseno uto in sadnimi drevesi"
+    },
+    {
+      "url": "/images/olga/studio/259704808.jpg",
+      "alt": "Vrtna miza s stoli v senci smreke"
+    },
+    {
+      "url": "/images/olga/1bedroom/880803183.jpg",
+      "alt": "Tlakovana pot skozi vrt mimo sivke in vinske trte"
+    },
+    {
+      "url": "/images/olga/studio/880803135.jpg",
+      "alt": "Vrtnice in glicinija, ki se vzpenjajo ob vhodu v hišo"
+    },
+    {
+      "url": "/images/olga/studio/259704819.jpg",
+      "alt": "Kovinska klopca s petunijami pred hišo"
+    },
+    {
+      "url": "/images/olga/studio2/880803055.jpg",
+      "alt": "Hortenzije in vrtnice ob beli ograji na dvorišču"
+    }
   ],
   "amenities": [
     "Brezplačen Wi-Fi",
@@ -27,69 +54,216 @@
       "id": "studio-one",
       "name": "Studio 1",
       "type": "Studio",
+      "description": "Studio v pritličju z zasebnim vhodom, jedilnim kotičkom in sedežno garnituro. Terasa s pogledom na vrt ima prostor za obedovanje na prostem.",
+      "areaSquareMetres": 25,
       "maxGuests": 2,
       "bathrooms": 1,
       "rooms": [
-        { "name": "Spalni prostor", "sleeps": 2, "beds": "1 velika zakonska postelja" }
+        {
+          "name": "Spalni prostor",
+          "sleeps": 2,
+          "beds": "1 velika zakonska postelja"
+        }
       ],
       "amenities": [
-        "Zasebna kopalnica",
-        "Manjša kuhinja"
+        "Zasebna kuhinjska niša s pomivalnim strojem in mikrovalovno pečico",
+        "Zasebna kopalnica s prho in sušilnikom za lase",
+        "Opremljena terasa s pogledom na vrt",
+        "Brezplačen Wi-Fi",
+        "Posteljnina in brisače vključene",
+        "Kajenje ni dovoljeno"
       ],
       "photos": [
-        { "url": "/images/olga/studio/880633183.jpg", "alt": "Zakonska postelja s kovinskim vzglavjem pred cvetlično tapeto v studiu" },
-        { "url": "/images/olga/studio/880633725.jpg", "alt": "Kuhinjska niša z rumenimi ploščicami, koritom in kuhalno ploščo" },
-        { "url": "/images/olga/studio/880633661.jpg", "alt": "Jedilni kotiček z belo mizo, kotno klopjo in blazinami z limonami" },
-        { "url": "/images/olga/studio/880633439.jpg", "alt": "Bela jedilna miza s pogrinjkom z limonami in pleteno košaro" }
+        {
+          "url": "/images/olga/studio/880633183.jpg",
+          "alt": "Zakonska postelja s kovinskim vzglavjem pred cvetlično tapeto v studiu"
+        },
+        {
+          "url": "/images/olga/studio/880633725.jpg",
+          "alt": "Kuhinjska niša z rumenimi ploščicami, koritom in kuhalno ploščo"
+        },
+        {
+          "url": "/images/olga/studio/880633661.jpg",
+          "alt": "Jedilni kotiček z belo mizo, kotno klopjo in blazinami z limonami"
+        },
+        {
+          "url": "/images/olga/studio/880633439.jpg",
+          "alt": "Bela jedilna miza s pogrinjkom z limonami in pleteno košaro"
+        },
+        {
+          "url": "/images/olga/studio/100538808.jpg",
+          "alt": "Vrtna hiša Apartments Olga s tlakovanim dvoriščem in nadstrešnim vhodom"
+        },
+        {
+          "url": "/images/olga/studio/259704808.jpg",
+          "alt": "Vrtna miza s stoli v senci smreke"
+        },
+        {
+          "url": "/images/olga/studio/259704819.jpg",
+          "alt": "Kovinska klopca s petunijami pred hišo"
+        },
+        {
+          "url": "/images/olga/studio/259704830.jpg",
+          "alt": "Vrt z leseno uto in sadnimi drevesi"
+        },
+        {
+          "url": "/images/olga/studio/880803135.jpg",
+          "alt": "Vrtnice in glicinija, ki se vzpenjajo ob vhodu v hišo"
+        },
+        {
+          "url": "/images/olga/studio/99044722.jpg",
+          "alt": "Pokrita terasa z mizo in stoli pred vhodom v nastanitev"
+        }
       ]
     },
     {
       "id": "one-bedroom-apartment",
       "name": "Apartma z 1 spalnico",
       "type": "Apartma",
+      "description": "Apartma v pritličju z zasebnim vhodom, ločeno spalnico in dnevnim prostorom z raztegljivim kavčem. Terasa s pogledom na vrt ima prostor za obedovanje na prostem.",
+      "areaSquareMetres": 40,
       "maxGuests": 3,
       "bedrooms": 1,
       "bathrooms": 1,
       "rooms": [
-        { "name": "Spalnica", "sleeps": 2, "beds": "1 velika zakonska postelja" }
+        {
+          "name": "Spalnica",
+          "sleeps": 2,
+          "beds": "1 velika zakonska postelja"
+        },
+        {
+          "name": "Dnevna soba",
+          "sleeps": 1,
+          "beds": "1 raztegljiv kavč"
+        }
       ],
       "amenities": [
-        "Zasebna kopalnica",
-        "Kuhinja"
+        "Zasebna kuhinja s hladilnikom, pomivalnim strojem in mikrovalovno pečico",
+        "Zasebna kopalnica s prho in sušilnikom za lase",
+        "Opremljena terasa s pogledom na vrt",
+        "Brezplačen Wi-Fi",
+        "Posteljnina in brisače vključene",
+        "Kajenje ni dovoljeno"
       ],
       "photos": [
-        { "url": "/images/olga/1bedroom/880630994.jpg", "alt": "Zakonska postelja s kovinskim vzglavjem pod okroglim oknom" },
-        { "url": "/images/olga/1bedroom/880632443.jpg", "alt": "Spalnica z dvema nočnima omaricama in bralnima lučkama" },
-        { "url": "/images/olga/1bedroom/880632823.jpg", "alt": "Dnevni prostor z ležiščem, cvetličnimi blazinami in odprto garderobo" },
-        { "url": "/images/olga/1bedroom/880632740.jpg", "alt": "Ležišče, ogledalo in televizor v dnevnem prostoru" },
-        { "url": "/images/olga/1bedroom/880632506.jpg", "alt": "Kuhinja s pisanimi ploščicami, koritom in oknom na vrt" },
-        { "url": "/images/olga/1bedroom/880632608.jpg", "alt": "Jedilni prostor z mizo, rumeno steno in retro hladilnikom" },
-        { "url": "/images/olga/1bedroom/880632974.jpg", "alt": "Lesena jedilna miza pred rumeno steno z uokvirjenimi grafikami" },
-        { "url": "/images/olga/1bedroom/880632913.jpg", "alt": "Kuhinjske police s kozarci, skodelicami in kuhalnikom za vodo" },
-        { "url": "/images/olga/1bedroom/880633986.jpg", "alt": "Spalnica s klimatsko napravo, odprto garderobo in oknom v zelenje" },
-        { "url": "/images/olga/1bedroom/880632679.jpg", "alt": "Televizor na steni, komoda in rdeč stolček ob prehodu v predsobo" },
-        { "url": "/images/olga/1bedroom/880634121.jpg", "alt": "Uokvirjena grafika nad blazinami s cvetličnim vzorcem" }
+        {
+          "url": "/images/olga/1bedroom/880630994.jpg",
+          "alt": "Zakonska postelja s kovinskim vzglavjem pod okroglim oknom"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632443.jpg",
+          "alt": "Spalnica z dvema nočnima omaricama in bralnima lučkama"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632823.jpg",
+          "alt": "Dnevni prostor z ležiščem, cvetličnimi blazinami in odprto garderobo"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632740.jpg",
+          "alt": "Ležišče, ogledalo in televizor v dnevnem prostoru"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632506.jpg",
+          "alt": "Kuhinja s pisanimi ploščicami, koritom in oknom na vrt"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632608.jpg",
+          "alt": "Jedilni prostor z mizo, rumeno steno in retro hladilnikom"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632974.jpg",
+          "alt": "Lesena jedilna miza pred rumeno steno z uokvirjenimi grafikami"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632913.jpg",
+          "alt": "Kuhinjske police s kozarci, skodelicami in kuhalnikom za vodo"
+        },
+        {
+          "url": "/images/olga/1bedroom/880633986.jpg",
+          "alt": "Spalnica s klimatsko napravo, odprto garderobo in oknom v zelenje"
+        },
+        {
+          "url": "/images/olga/1bedroom/880632679.jpg",
+          "alt": "Televizor na steni, komoda in rdeč stolček ob prehodu v predsobo"
+        },
+        {
+          "url": "/images/olga/1bedroom/880634121.jpg",
+          "alt": "Uokvirjena grafika nad blazinami s cvetličnim vzorcem"
+        },
+        {
+          "url": "/images/olga/1bedroom/100538808.jpg",
+          "alt": "Vrtna hiša Apartments Olga s tlakovanim dvoriščem in nadstrešnim vhodom"
+        },
+        {
+          "url": "/images/olga/1bedroom/880803183.jpg",
+          "alt": "Tlakovana pot skozi vrt mimo sivke in vinske trte"
+        },
+        {
+          "url": "/images/olga/1bedroom/880803222.jpg",
+          "alt": "Terasa pod trto z mizo in pletenimi stoli ob stopnicah v vrt"
+        }
       ]
     },
     {
       "id": "studio-two",
       "name": "Studio 2",
       "type": "Studio",
+      "description": "Studio v pritličju z zasebnim vhodom ter sedežnim in jedilnim kotičkom. Opremljena terasa s pogledom na vrt vabi k obedovanju na prostem.",
+      "areaSquareMetres": 30,
       "maxGuests": 2,
       "bathrooms": 1,
       "rooms": [
-        { "name": "Spalni prostor", "sleeps": 2, "beds": "1 velika zakonska postelja" }
+        {
+          "name": "Spalni prostor",
+          "sleeps": 2,
+          "beds": "1 velika zakonska postelja"
+        }
       ],
       "amenities": [
-        "Zasebna kopalnica",
-        "Manjša kuhinja"
+        "Zasebna kuhinja s pomivalnim strojem in mikrovalovno pečico",
+        "Zasebna kopalnica s prho in sušilnikom za lase",
+        "Opremljena terasa s pogledom na vrt",
+        "Brezplačen Wi-Fi",
+        "Posteljnina in brisače vključene",
+        "Kajenje ni dovoljeno"
       ],
       "photos": [
-        { "url": "/images/olga/studio2/880802302.jpg", "alt": "Postelja z leseno oblogo vzglavja pred rumeno steno v drugem studiu" },
-        { "url": "/images/olga/studio2/880802028.jpg", "alt": "Kuhinjska niša z vitrajnim okencem, koritom in retro hladilnikom" },
-        { "url": "/images/olga/studio2/880802080.jpg", "alt": "Modra okrogla miza in odprti garderobni omari v bivalnem prostoru" },
-        { "url": "/images/olga/studio2/880801951.jpg", "alt": "Modra jedilna miza s stoli pod grafiko z limonami" },
-        { "url": "/images/olga/studio2/880802487.jpg", "alt": "Jedilni kotiček z uokvirjeno grafiko in vrati v predsobo" }
+        {
+          "url": "/images/olga/studio2/880802302.jpg",
+          "alt": "Postelja z leseno oblogo vzglavja pred rumeno steno v drugem studiu"
+        },
+        {
+          "url": "/images/olga/studio2/880802028.jpg",
+          "alt": "Kuhinjska niša z vitrajnim okencem, koritom in retro hladilnikom"
+        },
+        {
+          "url": "/images/olga/studio2/880802080.jpg",
+          "alt": "Modra okrogla miza in odprti garderobni omari v bivalnem prostoru"
+        },
+        {
+          "url": "/images/olga/studio2/880801951.jpg",
+          "alt": "Modra jedilna miza s stoli pod grafiko z limonami"
+        },
+        {
+          "url": "/images/olga/studio2/880802487.jpg",
+          "alt": "Jedilni kotiček z uokvirjeno grafiko in vrati v predsobo"
+        },
+        {
+          "url": "/images/olga/studio2/100538808.jpg",
+          "alt": "Vrtna hiša Apartments Olga s tlakovanim dvoriščem in nadstrešnim vhodom"
+        },
+        {
+          "url": "/images/olga/studio2/259704808.jpg",
+          "alt": "Vrtna miza s stoli v senci smreke"
+        },
+        {
+          "url": "/images/olga/studio2/259704830.jpg",
+          "alt": "Vrt z leseno uto in sadnimi drevesi"
+        },
+        {
+          "url": "/images/olga/studio2/880803055.jpg",
+          "alt": "Hortenzije in vrtnice ob beli ograji na dvorišču"
+        }
       ]
     }
   ],
@@ -118,29 +292,55 @@
       ],
       "units": {
         "studio-one": {
+          "description": "A ground-floor studio with a private entrance, dining area and sofa. Step onto a garden-view terrace with outdoor dining space.",
           "rooms": [
-            { "name": "Sleeping area", "beds": "1 large double bed" }
+            {
+              "name": "Sleeping area",
+              "beds": "1 queen bed"
+            }
           ],
           "amenities": [
-            "Private bathroom",
-            "Kitchenette"
+            "Private kitchenette with dishwasher and microwave",
+            "Private bathroom with shower and hairdryer",
+            "Furnished terrace with garden view",
+            "Free Wi-Fi",
+            "Bed linen and towels included",
+            "Non-smoking"
           ],
           "photoAlts": [
             "Double bed with a wrought-iron headboard against the floral wallpaper in the studio",
             "Kitchenette with yellow tiles, a sink and a hob",
             "Dining nook with a white table, a corner bench and lemon-print cushions",
-            "White dining table with a lemon-print runner and a woven basket"
+            "White dining table with a lemon-print runner and a woven basket",
+            "The Apartments Olga garden house with its paved courtyard and covered entrance",
+            "Garden table and chairs in the shade of the spruce",
+            "Wrought-iron bench with petunias in front of the house",
+            "Garden with a wooden hut and fruit trees",
+            "Roses and wisteria climbing beside the house entrance",
+            "Covered terrace with a table and chairs outside the entrance"
           ]
         },
         "one-bedroom-apartment": {
+          "description": "A ground-floor apartment with a private entrance, separate bedroom and living room with a sofa bed. Enjoy outdoor dining on the garden-view terrace.",
           "name": "One-bedroom apartment",
           "type": "Apartment",
           "rooms": [
-            { "name": "Bedroom", "beds": "1 large double bed" }
+            {
+              "name": "Bedroom",
+              "beds": "1 queen bed"
+            },
+            {
+              "name": "Living room",
+              "beds": "1 sofa bed"
+            }
           ],
           "amenities": [
-            "Private bathroom",
-            "Kitchen"
+            "Private kitchen with fridge, dishwasher and microwave",
+            "Private bathroom with shower and hairdryer",
+            "Furnished terrace with garden view",
+            "Free Wi-Fi",
+            "Bed linen and towels included",
+            "Non-smoking"
           ],
           "photoAlts": [
             "Double bed with a wrought-iron frame beneath the round window",
@@ -153,23 +353,38 @@
             "Kitchen shelves with glasses, bowls and a kettle",
             "Bedroom with air conditioning, open wardrobe shelves and a window onto greenery",
             "Wall-mounted television, chest of drawers and a red chair by the hallway",
-            "Framed print above floral-patterned cushions"
+            "Framed print above floral-patterned cushions",
+            "The Apartments Olga garden house with its paved courtyard and covered entrance",
+            "Cobbled garden path past lavender and a grapevine",
+            "Vine-shaded terrace with a table and wicker chairs beside the garden steps"
           ]
         },
         "studio-two": {
+          "description": "A ground-floor studio with a private entrance, seating area and dining space. Enjoy outdoor meals on the furnished terrace overlooking the garden.",
           "rooms": [
-            { "name": "Sleeping area", "beds": "1 large double bed" }
+            {
+              "name": "Sleeping area",
+              "beds": "1 queen bed"
+            }
           ],
           "amenities": [
-            "Private bathroom",
-            "Kitchenette"
+            "Private kitchen with dishwasher and microwave",
+            "Private bathroom with shower and hairdryer",
+            "Furnished terrace with garden view",
+            "Free Wi-Fi",
+            "Bed linen and towels included",
+            "Non-smoking"
           ],
           "photoAlts": [
             "Bed with a wooden headboard against the yellow wall in the second studio",
             "Kitchenette with a stained-glass window, a sink and a retro fridge",
             "Round blue table and open wardrobes in the living space",
             "Blue dining table and chairs beneath a lemon print",
-            "Dining corner with a framed print and the door to the hallway"
+            "Dining corner with a framed print and the door to the hallway",
+            "The Apartments Olga garden house with its paved courtyard and covered entrance",
+            "Garden table and chairs in the shade of the spruce",
+            "Garden with a wooden hut and fruit trees",
+            "Hydrangeas and roses along the white fence in the courtyard"
           ]
         }
       }

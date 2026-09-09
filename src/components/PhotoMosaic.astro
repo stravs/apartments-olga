@@ -12,36 +12,48 @@ interface Props {
   label: string;
   locale: Locale;
   eager?: boolean;
+  leadPhotoIndex?: number;
+  previewCount?: number;
+  mobilePreviewCount?: number;
 }
-const { photos, galleryIndex, label, locale, eager = false } = Astro.props;
+const { photos, galleryIndex, label, locale, eager = false, leadPhotoIndex = 0, previewCount = photos.length === 4 ? 3 : 5, mobilePreviewCount = previewCount } = Astro.props;
 const t = useTranslations(locale);
 
-/** One lead photo plus four supporting tiles; the rest stay reachable through the lightbox. */
-const tiles = photos.slice(0, 5);
+/** Four-photo galleries show a lead and two stacked previews; the rest stay in the lightbox. */
+const orderedPhotos = photos.map((photo, photoIndex) => ({ photo, photoIndex }));
+if (leadPhotoIndex > 0 && leadPhotoIndex < orderedPhotos.length) {
+  orderedPhotos.unshift(...orderedPhotos.splice(leadPhotoIndex, 1));
+}
+const tiles = orderedPhotos.slice(0, Math.max(previewCount, mobilePreviewCount));
+const expandedMobile = mobilePreviewCount > previewCount;
 const hidden = photos.length - tiles.length;
 const leadSizes = '(max-width: 900px) 100vw, (max-width: 1280px) 46vw, 600px';
 const tileSizes = '(max-width: 900px) 50vw, (max-width: 1280px) 23vw, 300px';
+const pairedTileSizes = '(max-width: 900px) 50vw, (max-width: 1280px) 46vw, 640px';
 ---
-<div class="photo-mosaic" data-tiles={tiles.length} data-photo-count={photos.length}>
-  {tiles.map((photo, index) => (
+<div class="photo-mosaic" data-tiles={tiles.length} data-preview-count={previewCount} data-photo-count={photos.length}>
+  {tiles.map(({ photo, photoIndex }, index) => (
     <button
       class:list={["mosaic-tile", { "mosaic-tile--lead": index === 0 }]}
       type="button"
       data-gallery-index={galleryIndex}
-      data-photo-index={index}
+      data-photo-index={photoIndex}
       aria-label={`${t('openGallery')} ${label} — ${photo.alt}`}
     >
       <Picture
         src={photo.image}
         formats={['avif', 'webp']}
-        widths={widthsFor(photo.image, index === 0 ? [480, 640, 960] : [240, 320, 480])}
-        sizes={index === 0 ? leadSizes : tileSizes}
+        widths={widthsFor(photo.image, index === 0 || previewCount <= 3 ? [480, 640, 960] : [240, 320, 480])}
+        sizes={index === 0 ? leadSizes : previewCount <= 3 ? pairedTileSizes : tileSizes}
         alt={photo.alt}
         loading={eager && index === 0 ? 'eager' : 'lazy'}
         decoding={eager && index === 0 ? 'sync' : 'async'}
       />
       {hidden > 0 && index === tiles.length - 1 && (
         <span class="mosaic-more" aria-hidden="true">+{hidden}<small>{t('photos', { count: hidden })}</small></span>
+      )}
+      {expandedMobile && index === previewCount - 1 && (
+        <span class="mosaic-more mosaic-more--desktop" aria-hidden="true">+{photos.length - previewCount}<small>{t('photos', { count: photos.length - previewCount })}</small></span>
       )}
     </button>
   ))}

@@ -6,7 +6,6 @@ import { lightboxPhotos } from '../lib/images';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
 import Intro from './Intro.astro';
-import PropertyGallery from './PropertyGallery.astro';
 import Units from './Units.astro';
 import UnitLightbox from './UnitLightbox.astro';
 import Amenities from './Amenities.astro';
@@ -35,7 +34,6 @@ const lightboxGalleries = await Promise.all(galleries.map(async (gallery) => ({
   name: gallery.name,
   photos: await lightboxPhotos(gallery.photos, gallery.name),
 })));
-const showHouseGallery = property.photos.length > 1;
 const designStyle = `--ink:${config.design.colors.text};--muted:${config.design.colors.muted};--paper:${config.design.colors.background};--soft:${config.design.colors.surface};--moss:${config.design.colors.primary};--clay:${config.design.colors.accent};--font-display:${JSON.stringify(config.design.fonts.heading)},Georgia,serif;--font-body:${JSON.stringify(config.design.fonts.body)},system-ui,sans-serif`;
 ---
 <div data-edges={config.design.edges} style={designStyle}>
@@ -43,7 +41,6 @@ const designStyle = `--ink:${config.design.colors.text};--muted:${config.design.
   <main>
     <Hero {property} {locale} />
     {enabled('intro') && <Intro {property} {locale} />}
-    {showHouseGallery && <PropertyGallery {property} {locale} galleryIndex={0} />}
     {enabled('units') && property.units.length > 0 && <Units {property} {locale} firstGalleryIndex={1} />}
     {enabled('amenities') && property.amenities.length > 0 && <Amenities amenities={property.amenities} {locale} />}
     {enabled('location') && <Location {property} {locale} />}

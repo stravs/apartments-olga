@@ -17,7 +17,7 @@ npm run preview  # serve the built output
 | --- | --- |
 | `.data/property.json` | The property: description, address, amenities, units, rooms, photos and per-locale translations. |
 | `.data/site.json` | Design tokens and page composition. |
-| `src/assets/images/olga/` | Every photo, grouped into `property/` (house and garden) and one folder per unit. |
+| `src/assets/images/olga/` | Original photo folders: `studio/`, `1bedroom/`, and `studio2/`, mirrored from `/workspace/gank/public/images/olga/`. Outdoor photos remain with their original units. |
 
 Slovenian is the base language in `.data/property.json`; English lives under
 `translations.en`. The `photoAlts` arrays are **index-aligned** with the matching `photos`
@@ -25,7 +25,7 @@ array, so adding a photo means adding its English alt text at the same position.
 
 ## Adding photos
 
-1. Drop the file into `src/assets/images/olga/<property|studio|1bedroom|studio2>/`.
+1. Drop the file into `src/assets/images/olga/<studio|1bedroom|studio2>/`, preserving its original unit folder.
 2. Add an entry to the relevant `photos` array in `.data/property.json` with a `url` of
    `/images/olga/<folder>/<file>.jpg` and a Slovenian `alt`.
 3. Append the English alt text at the same index in the matching `photoAlts` array.

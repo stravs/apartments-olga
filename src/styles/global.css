@@ -165,7 +165,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   display: grid;
   grid-template-columns: minmax(0, 1.618034fr) minmax(0, 1fr);
   width: 100%;
-  margin: 12px auto 56px;
+  margin: 24px auto 56px;
   min-height: clamp(480px, 43vw, 640px);
   perspective: 1800px;
   perspective-origin: 61.8034% 50%;
@@ -294,7 +294,13 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   font-size: .85rem;
 }
 
-.house-section .lead { margin: 0 0 28px }
+.house-section { background: var(--ink); color: var(--paper) }
+.house-section .eyebrow,
+.house-section .section-heading > p { color: var(--soft) }
+.house-section .lead {
+  margin: 0 0 28px;
+  color: color-mix(in srgb, var(--paper) 82%, var(--ink));
+}
 
 /* --- Photo mosaic --------------------------------------------------------- */
 .photo-mosaic {
@@ -388,7 +394,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 }
 
 /* --- Units ---------------------------------------------------------------- */
-.units-section { background: var(--soft) }
+.units-section { background: var(--paper) }
 
 .unit-list { display: grid; gap: 40px }
 
@@ -396,7 +402,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  background: var(--paper);
+  background: #fff;
   box-shadow: 0 18px 46px rgba(53, 62, 48, .09);
   scroll-margin-top: 24px;
 }
@@ -407,6 +413,27 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 }
 
 .unit-card .mosaic-tile { border-radius: 0 }
+
+@media (min-width: 901px) {
+.unit-card .photo-mosaic[data-preview-count="3"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 20 / 9;
+}
+
+.unit-card .photo-mosaic[data-preview-count="3"] .mosaic-tile {
+  min-height: 0;
+  aspect-ratio: auto;
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.unit-card .photo-mosaic[data-preview-count="3"] .mosaic-tile--lead {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+.unit-card .photo-mosaic[data-preview-count="3"] .mosaic-tile:nth-child(n + 4) { display: none }
+}
 
 .unit-body {
   display: grid;
@@ -518,20 +545,35 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 }
 
 /* --- Location ------------------------------------------------------------- */
-.location {
+.location-heading {
   display: grid;
-  grid-template-columns: 1fr 1.45fr;
+  grid-template-columns: 1.2fr 1fr;
   gap: 72px;
-  align-items: center;
+  align-items: end;
+  margin-bottom: 40px;
 }
 
-.location iframe {
-  width: 100%;
-  height: 430px;
-  border: 8px solid var(--cream);
-  border-radius: var(--builder-radius, 0);
-  filter: saturate(.72) contrast(.96);
+.location-heading h2 { max-width: 15ch }
+.location-heading .lead { margin: 0; max-width: 42ch }
+.location-map {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--cream);
 }
+.location iframe {
+  display: block;
+  width: 100%;
+  height: 440px;
+  border: 0;
+}
+.location-address-bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 32px; background: #fff }
+.location-address { display: flex; align-items: center; gap: 18px }
+.location-address p { margin: 0 0 4px; font-weight: 700 }
+.location-address address { color: var(--muted); font-style: normal; font-size: .9rem }
+.location-pin { display: grid; place-items: center; flex: 0 0 48px; height: 48px; border-radius: 50%; background: var(--soft); color: var(--clay) }
+.location-pin svg { width: 24px; height: 24px }
+.location-address-bar .primary-button { flex-shrink: 0; gap: 16px }
 
 /* --- Booking call to action ----------------------------------------------- */
 .booking-cta {
@@ -562,17 +604,20 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 .footer {
   max-width: var(--max);
   margin: auto;
-  padding: 58px 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 40px;
+  padding: 40px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   border-top: 1px solid var(--line);
   font-size: .85rem;
 }
 
 .footer strong { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600 }
-.footer p { color: var(--muted) }
-.footer address { display: flex; flex-direction: column; font-style: normal }
+.footer p { margin: 8px 0 0; color: var(--muted) }
+.footer > p { margin: 0; margin-left: auto; text-align: right }
+.footer address { display: flex; flex-direction: column; gap: 6px; font-style: normal; overflow-wrap: anywhere }
 
 /* --- Lightbox ------------------------------------------------------------- */
 .lightbox {
@@ -898,7 +943,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 /* --- Responsive: tablet --------------------------------------------------- */
 @media (max-width: 900px) {
   .section, .footer { padding-left: 24px; padding-right: 24px }
-  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; margin: 4px auto 36px; perspective: none }
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; margin-bottom: 36px; perspective: none }
   /* Turn the fold onto its horizontal axis; both faces share the same seam. */
   .hero-media {
     min-height: 380px;
@@ -931,10 +976,11 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 
   .unit-list { gap: 28px }
   .unit-body { grid-template-columns: 1fr; gap: 28px; padding: 32px 30px 36px }
-  .location { grid-template-columns: 1fr; gap: 40px }
+  .unit-aside { display: contents }
+  .mosaic-more--desktop { display: none }
+  .unit-chips { grid-row: 1; margin-bottom: 0 }
+  .location-heading { grid-template-columns: 1fr; gap: 24px }
   .amenities-section ul { grid-template-columns: repeat(2, 1fr) }
-  .footer { grid-template-columns: 1fr 1fr }
-  .footer > p { grid-column: 1 / -1 }
 
   .guest-shell { grid-template-columns: 1fr; gap: 0 }
   .guest-sidebar {
@@ -963,7 +1009,6 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   .site-actions { gap: 12px }
   .site-header .guest-guide-link { display: none }
 
-  .hero { margin-top: 4px }
   .hero-media { min-height: 0 }
   .hero-media img, .hero--empty .image-empty { height: 320px }
   .hero-card { padding: 30px 22px 34px }
@@ -976,10 +1021,12 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   .unit-body { padding: 26px 20px 30px }
   .unit-card { border-radius: 12px }
   .amenities-section ul { grid-template-columns: 1fr; gap: 12px }
-  .location iframe { height: 300px; border-width: 5px }
+  .location iframe { height: 340px }
+  .location-address-bar { align-items: stretch; flex-direction: column; padding: 22px }
+  .location-heading { margin-bottom: 28px }
   .booking-cta { padding: 78px 20px }
-  .footer { padding: 40px 20px; grid-template-columns: 1fr }
-  .footer > p { grid-column: auto }
+  .footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 24px }
+  .footer > p { margin-left: 0; text-align: left }
 
   .lightbox-bar { height: 58px; padding: 0 10px 0 16px }
   .lightbox-stage { position: relative; display: block }

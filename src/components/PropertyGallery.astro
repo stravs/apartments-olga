@@ -9,8 +9,10 @@ interface Props { property: Property; locale: Locale; galleryIndex: number }
 const { property, locale, galleryIndex } = Astro.props;
 const t = useTranslations(locale);
 const photos = resolvePhotos(property.photos, property.name);
+const leadPhotoIndex = Math.max(0, property.photos.findIndex((photo) => photo.url === '/images/olga/studio/259704819.jpg'));
 ---
-<section class="section house-section" id="house">
+<section class="house-section" id="house">
+  <div class="section">
   <div class="section-heading">
     <div>
       <p class="eyebrow">{t('aroundTheHouse')}</p>
@@ -19,5 +21,6 @@ const photos = resolvePhotos(property.photos, property.name);
     <p>{t('photosCount', { count: photos.length })}</p>
   </div>
   <p class="lead">{t('houseAndGardenCopy')}</p>
-  <PhotoMosaic {photos} {galleryIndex} label={property.name} {locale} />
+  <PhotoMosaic {photos} {galleryIndex} {leadPhotoIndex} label={property.name} {locale} />
+  </div>
 </section>
