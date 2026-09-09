@@ -2,8 +2,7 @@
   "schemaVersion": 1,
   "site": {
     "slug": "apartments-olga",
-    "locale": "en",
-    "url": "https://apartments-olga.example"
+    "locale": "en"
   },
   "design": {
     "colors": {

@@ -34,15 +34,48 @@ The `/images/...` url is a stable key, not a served path — `src/lib/images.ts`
 the file under `src/assets/images` so Astro can emit AVIF/WebP at several widths. A url with
 no matching file fails the build with the offending path, rather than shipping a broken image.
 
+## Cloudflare Workers (Wrangler)
+
+Connect the GitHub repository `stravs/apartments-olga` using these build settings:
+
+| Setting | Value |
+| --- | --- |
+| Worker name | `apartments-olga` |
+| Production branch | `main` |
+| Root directory | Repository root (leave blank) |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Static assets directory | `dist`, set in `wrangler.jsonc` |
+| Node version | `24.16.0`, pinned in `.node-version` |
+
+This is a static Astro site deployed with Wrangler to Workers Static Assets. No server
+adapter or Worker entrypoint is required. Images are optimized during the build using
+the originals in the repository. Existing routes use trailing slashes; unknown routes
+return 404 instead of displaying the homepage.
+
+Set the build environment variable `SITE_URL` to the full production origin (including
+`https://`), either your custom domain or the Worker's actual `workers.dev` URL. Add it
+under **Settings → Build → Variables and secrets**, because Astro needs it at build time.
+URL precedence is `SITE_URL`, optional `site.url` in `.data/site.json`, then
+`http://localhost:4321` for local development. Set this before the first production build.
+This single value controls canonical links, language alternates, social images, JSON-LD,
+robots.txt and the sitemap. Set `SITE_URL` for preview builds too if they should reference
+the production domain.
+
+To reproduce a clean build locally:
+
+```sh
+npm ci
+SITE_URL=https://your-domain.example npm run build
+```
+
+For a local deployment, `npm run deploy` builds and deploys using Wrangler authentication.
+`npm run deploy:check` builds and runs a Wrangler dry run without deploying.
+`npm run preview:cloudflare` builds and serves the site locally using Workers tooling.
+
+Configuration follows [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/).
+
 ## Going live
-
-Two places still carry the placeholder origin:
-
-- `site` in `astro.config.mjs`
-- `site.url` in `.data/site.json`
-
-Set both to the real domain so canonical links, `hreflang` alternates, Open Graph tags,
-JSON-LD and the sitemap resolve correctly.
 
 Optional but worth adding when known: `latitude` / `longitude` on the property (the location
 map currently geocodes the street address), `checkIn` / `checkOut` times, `rating` /

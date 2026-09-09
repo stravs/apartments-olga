@@ -1,10 +1,13 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { readFileSync } from 'node:fs';
 
-// Change `site` here and `site.url` in .data/site.json when the real domain is ready.
+const siteConfig = JSON.parse(readFileSync(process.env.SITE_CONFIG_FILE ?? '.data/site.json', 'utf8'));
+// Set SITE_URL in Workers Build variables to the production domain or workers.dev URL.
+const site = process.env.SITE_URL || siteConfig.site.url || 'http://localhost:4321';
 export default defineConfig({
   output: 'static',
-  site: 'https://apartments-olga.example',
+  site,
   i18n: { locales: ['en', 'sl'], defaultLocale: 'en', routing: { prefixDefaultLocale: false } },
   prefetch: true,
   integrations: [
