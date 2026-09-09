@@ -1,0 +1,98 @@
+---
+import type { LightboxPhoto } from '../lib/images';
+import type { Locale } from '../i18n';
+import { useTranslations } from '../i18n';
+
+interface Props { galleries: { name: string; photos: LightboxPhoto[] }[]; locale: Locale }
+const { galleries, locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<dialog class="lightbox" id="gallery-lightbox" aria-label={t('unitPhotos')}>
+  <div class="lightbox-bar">
+    <p aria-live="polite"><span id="lightbox-title"></span> · <strong id="lightbox-current">1</strong> / <span id="lightbox-total">1</span></p>
+    <button class="lightbox-close" type="button" aria-label={t('closeGallery')}>×</button>
+  </div>
+  <div class="lightbox-stage">
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label={t('previousPhoto')}>‹</button>
+    <figure>
+      <img id="lightbox-image" alt="" sizes="100vw" decoding="async" />
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+    <button class="lightbox-nav lightbox-next" type="button" aria-label={t('nextPhoto')}>›</button>
+  </div>
+</dialog>
+<script is:inline define:vars={{ galleries, photoLabel: t('photo') }}>
+  const dialog = document.querySelector('#gallery-lightbox');
+  const image = document.querySelector('#lightbox-image');
+  const caption = document.querySelector('#lightbox-caption');
+  const current = document.querySelector('#lightbox-current');
+  const total = document.querySelector('#lightbox-total');
+  const title = document.querySelector('#lightbox-title');
+  let activeGallery = 0;
+  let activePhoto = 0;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  function photosOf(index) {
+    const gallery = galleries[index];
+    return gallery ? gallery.photos : [];
+  }
+
+  function preload(index) {
+    const photos = photosOf(activeGallery);
+    const photo = photos[(index + photos.length) % photos.length];
+    if (!photo) return;
+    const warm = new Image();
+    warm.sizes = '100vw';
+    warm.srcset = photo.srcset;
+    warm.src = photo.src;
+  }
+
+  function show(index) {
+    const photos = photosOf(activeGallery);
+    if (!photos.length) return;
+    activePhoto = (index + photos.length) % photos.length;
+    const photo = photos[activePhoto];
+    image.srcset = photo.srcset;
+    image.src = photo.src;
+    image.width = photo.width;
+    image.height = photo.height;
+    image.alt = photo.alt || `${photoLabel} ${activePhoto + 1}`;
+    caption.textContent = photo.alt || '';
+    current.textContent = String(activePhoto + 1);
+    preload(activePhoto + 1);
+    preload(activePhoto - 1);
+  }
+
+  document.querySelectorAll('[data-gallery-index]').forEach((button) => button.addEventListener('click', () => {
+    const index = Number(button.dataset.galleryIndex);
+    const photos = photosOf(index);
+    if (!photos.length) return;
+    activeGallery = index;
+    title.textContent = galleries[index].name;
+    total.textContent = String(photos.length);
+    dialog.querySelectorAll('.lightbox-nav').forEach((nav) => { nav.hidden = photos.length < 2; });
+    show(Number(button.dataset.photoIndex));
+    dialog.showModal();
+    document.body.classList.add('lightbox-open');
+  }));
+
+  dialog.querySelector('.lightbox-close').addEventListener('click', () => dialog.close());
+  dialog.querySelector('.lightbox-prev').addEventListener('click', () => show(activePhoto - 1));
+  dialog.querySelector('.lightbox-next').addEventListener('click', () => show(activePhoto + 1));
+  dialog.addEventListener('close', () => document.body.classList.remove('lightbox-open'));
+  dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); show(activePhoto - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); show(activePhoto + 1); }
+  });
+  dialog.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+    touchStartY = event.changedTouches[0].clientY;
+  }, { passive: true });
+  dialog.addEventListener('touchend', (event) => {
+    const distanceX = event.changedTouches[0].clientX - touchStartX;
+    const distanceY = event.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(distanceX) > 50 && Math.abs(distanceX) > Math.abs(distanceY)) show(activePhoto + (distanceX < 0 ? 1 : -1));
+  }, { passive: true });
+</script>

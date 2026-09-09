@@ -1,0 +1,102 @@
+---
+import '../styles/global.css';
+import { getSiteConfig } from '../config/site';
+import type { Locale } from '../i18n';
+import { defaultLocale, localePath, locales, pathWithoutLocale } from '../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string | undefined;
+  image?: string | undefined;
+  imageWidth?: number | string | undefined;
+  imageHeight?: number | string | undefined;
+  imageAlt?: string | undefined;
+  siteName?: string | undefined;
+  noindex?: boolean | undefined;
+  jsonLd?: Record<string, unknown> | undefined;
+  locale?: Locale;
+  alternates?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  imageWidth,
+  imageHeight,
+  imageAlt,
+  siteName,
+  noindex = false,
+  jsonLd,
+  locale = defaultLocale,
+  alternates = false,
+} = Astro.props;
+
+const siteConfig = await getSiteConfig();
+
+/** Ask Google Fonts only for the weights the stylesheet actually uses. */
+const fontWeights = new Map<string, Set<string>>();
+const requestWeights = (family: string, weights: string[]) => {
+  const existing = fontWeights.get(family) ?? new Set<string>();
+  weights.forEach((weight) => existing.add(weight));
+  fontWeights.set(family, existing);
+};
+requestWeights(siteConfig.design.fonts.heading, ['500', '600', '700']);
+requestWeights(siteConfig.design.fonts.body, ['400', '500', '600', '700']);
+const googleFontsUrl = `https://fonts.googleapis.com/css2?${[...fontWeights]
+  .map(([family, weights]) => `family=${encodeURIComponent(family)}:wght@${[...weights].sort().join(';')}`)
+  .join('&')}&display=swap`;
+
+const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonicalUrl = canonical ?? new URL(pathname, Astro.site ?? Astro.url.origin).href;
+const localeAlternates = alternates ? locales.map((item) => ({
+  locale: item,
+  url: new URL(localePath(item, pathWithoutLocale(Astro.url.pathname)), Astro.site ?? Astro.url.origin).href,
+})) : [];
+const openGraphLocale = (item: Locale) => (item === 'sl' ? 'sl_SI' : 'en_US');
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={siteConfig.design.colors.primary} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {localeAlternates.map((alternate) => <link rel="alternate" hreflang={alternate.locale} href={alternate.url} />)}
+    {localeAlternates.length > 0 && <link rel="alternate" hreflang="x-default" href={localeAlternates.find((item) => item.locale === defaultLocale)?.url} />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href={googleFontsUrl} rel="stylesheet" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={openGraphLocale(locale)} />
+    {locales.filter((item) => item !== locale).map((item) => <meta property="og:locale:alternate" content={openGraphLocale(item)} />)}
+    {siteName && <meta property="og:site_name" content={siteName} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {image && <meta property="og:image" content={image} />}
+    {image && imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
+    {image && imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
+    {image && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+    {image && imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body><slot /></body>
+</html>

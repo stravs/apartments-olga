@@ -1,0 +1,108 @@
+---
+import { getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Page from './Page.astro';
+import { localizeProperty, propertyMetaDescription, propertyLocation } from '../domain/property';
+import { propertyRepository } from '../repositories/property-repository';
+import { getSiteConfig } from '../config/site';
+import { absoluteUrl, resolveImage } from '../lib/images';
+import type { Locale } from '../i18n';
+import { localePath, locales, useTranslations } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const sourceProperty = await propertyRepository.get();
+if (!sourceProperty) throw new Error('No property data. Add .data/property.json before building.');
+const property = localizeProperty(sourceProperty, locale);
+const t = useTranslations(locale);
+const siteConfig = await getSiteConfig();
+const description = propertyMetaDescription(property);
+const canonical = new URL(localePath(locale), Astro.site ?? Astro.url.origin).href;
+const location = propertyLocation(property);
+const mapsUrl = property.latitude !== undefined && property.longitude !== undefined
+  ? `https://www.google.com/maps/search/?api=1&query=${property.latitude},${property.longitude}`
+  : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+
+/** Social crawlers want one absolute, reasonably sized JPEG rather than a responsive set. */
+const heroPhoto = property.photos[0];
+const heroImage = heroPhoto ? resolveImage(heroPhoto.url) : undefined;
+const ogImage = heroImage ? await getImage({ src: heroImage, format: 'jpeg', width: heroImage.width }) : undefined;
+
+const photoUrl = (url: string) => absoluteUrl(resolveImage(url).src, Astro.site);
+const amenityFeatures = (names: string[]) => names.map((name) => ({
+  '@type': 'LocationFeatureSpecification',
+  name,
+  value: true,
+}));
+
+/** Schema.org treats absent and empty as different things; send neither. */
+const compact = <T,>(value: T): T => JSON.parse(JSON.stringify(value, (_key, item) => (
+  Array.isArray(item) && item.length === 0 ? undefined : item
+))) as T;
+
+const jsonLd = compact({
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  '@id': `${canonical}#lodging`,
+  name: property.name,
+  description: property.description,
+  url: canonical,
+  image: [...property.photos, ...property.units.flatMap((unit) => unit.photos)].map((photo) => photoUrl(photo.url)),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: property.address,
+    addressLocality: property.city,
+    addressCountry: property.country,
+  },
+  geo: property.latitude !== undefined && property.longitude !== undefined
+    ? { '@type': 'GeoCoordinates', latitude: property.latitude, longitude: property.longitude }
+    : undefined,
+  hasMap: mapsUrl,
+  telephone: property.contact?.phone,
+  email: property.contact?.email,
+  aggregateRating: property.rating && property.reviewCount
+    ? { '@type': 'AggregateRating', ratingValue: property.rating, reviewCount: property.reviewCount, bestRating: 10 }
+    : undefined,
+  sameAs: property.bookingUrl,
+  inLanguage: [...locales],
+  knowsLanguage: [...locales],
+  numberOfRooms: property.units.length,
+  checkinTime: property.checkIn,
+  checkoutTime: property.checkOut,
+  amenityFeature: amenityFeatures(property.amenities),
+  containsPlace: property.units.map((unit) => ({
+    '@type': 'Accommodation',
+    '@id': `${canonical}#unit-${unit.id}`,
+    url: `${canonical}#unit-${unit.id}`,
+    name: unit.name,
+    description: unit.description,
+    accommodationCategory: unit.type,
+    image: unit.photos.map((photo) => photoUrl(photo.url)),
+    numberOfBedrooms: unit.bedrooms,
+    numberOfBathroomsTotal: unit.bathrooms,
+    occupancy: unit.maxGuests
+      ? { '@type': 'QuantitativeValue', maxValue: unit.maxGuests, unitText: 'guests' }
+      : undefined,
+    floorSize: unit.areaSquareMetres
+      ? { '@type': 'QuantitativeValue', value: unit.areaSquareMetres, unitCode: 'MTK' }
+      : undefined,
+    bed: unit.rooms.filter((room) => room.beds).map((room) => ({ '@type': 'BedDetails', typeOfBed: room.beds })),
+    amenityFeature: amenityFeatures(unit.amenities),
+  })),
+});
+---
+<BaseLayout
+  title={`${property.name} | ${property.city ?? t('homeTitleFallback')}`}
+  {description}
+  {canonical}
+  image={ogImage ? absoluteUrl(ogImage.src, Astro.site) : undefined}
+  imageWidth={ogImage?.attributes.width}
+  imageHeight={ogImage?.attributes.height}
+  imageAlt={heroPhoto?.alt ?? property.name}
+  siteName={property.name}
+  {jsonLd}
+  {locale}
+  alternates
+>
+  <Page {property} config={siteConfig} {locale} />
+</BaseLayout>

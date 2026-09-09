@@ -1,0 +1,178 @@
+{
+  "name": "Apartments Olga",
+  "type": "Apartmaji",
+  "description": "Mirna vrtna hiša na Bledu s tremi samostojnimi nastanitvenimi enotami, zasebnim parkiriščem in brezplačnim Wi-Fi.",
+  "address": "Finžgarjeva cesta 17",
+  "city": "Bled",
+  "country": "Slovenija",
+  "photos": [
+    { "url": "/images/olga/property/99044722.jpg", "alt": "Pokrita terasa z mizo in stoli pred vhodom v nastanitev" },
+    { "url": "/images/olga/property/100538808.jpg", "alt": "Vrtna hiša Apartments Olga s tlakovanim dvoriščem in nadstrešnim vhodom" },
+    { "url": "/images/olga/property/880803222.jpg", "alt": "Terasa pod trto z mizo in pletenimi stoli ob stopnicah v vrt" },
+    { "url": "/images/olga/property/259704830.jpg", "alt": "Vrt z leseno uto in sadnimi drevesi" },
+    { "url": "/images/olga/property/259704808.jpg", "alt": "Vrtna miza s stoli v senci smreke" },
+    { "url": "/images/olga/property/880803183.jpg", "alt": "Tlakovana pot skozi vrt mimo sivke in vinske trte" },
+    { "url": "/images/olga/property/880803135.jpg", "alt": "Vrtnice in glicinija, ki se vzpenjajo ob vhodu v hišo" },
+    { "url": "/images/olga/property/259704819.jpg", "alt": "Kovinska klopca s petunijami pred hišo" },
+    { "url": "/images/olga/property/880803055.jpg", "alt": "Hortenzije in vrtnice ob beli ograji na dvorišču" }
+  ],
+  "amenities": [
+    "Brezplačen Wi-Fi",
+    "Zasebno parkirišče",
+    "Vrt",
+    "Terasa"
+  ],
+  "units": [
+    {
+      "id": "studio-one",
+      "name": "Studio 1",
+      "type": "Studio",
+      "maxGuests": 2,
+      "bathrooms": 1,
+      "rooms": [
+        { "name": "Spalni prostor", "sleeps": 2, "beds": "1 velika zakonska postelja" }
+      ],
+      "amenities": [
+        "Zasebna kopalnica",
+        "Manjša kuhinja"
+      ],
+      "photos": [
+        { "url": "/images/olga/studio/880633183.jpg", "alt": "Zakonska postelja s kovinskim vzglavjem pred cvetlično tapeto v studiu" },
+        { "url": "/images/olga/studio/880633725.jpg", "alt": "Kuhinjska niša z rumenimi ploščicami, koritom in kuhalno ploščo" },
+        { "url": "/images/olga/studio/880633661.jpg", "alt": "Jedilni kotiček z belo mizo, kotno klopjo in blazinami z limonami" },
+        { "url": "/images/olga/studio/880633439.jpg", "alt": "Bela jedilna miza s pogrinjkom z limonami in pleteno košaro" }
+      ]
+    },
+    {
+      "id": "one-bedroom-apartment",
+      "name": "Apartma z 1 spalnico",
+      "type": "Apartma",
+      "maxGuests": 3,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rooms": [
+        { "name": "Spalnica", "sleeps": 2, "beds": "1 velika zakonska postelja" }
+      ],
+      "amenities": [
+        "Zasebna kopalnica",
+        "Kuhinja"
+      ],
+      "photos": [
+        { "url": "/images/olga/1bedroom/880630994.jpg", "alt": "Zakonska postelja s kovinskim vzglavjem pod okroglim oknom" },
+        { "url": "/images/olga/1bedroom/880632443.jpg", "alt": "Spalnica z dvema nočnima omaricama in bralnima lučkama" },
+        { "url": "/images/olga/1bedroom/880632823.jpg", "alt": "Dnevni prostor z ležiščem, cvetličnimi blazinami in odprto garderobo" },
+        { "url": "/images/olga/1bedroom/880632740.jpg", "alt": "Ležišče, ogledalo in televizor v dnevnem prostoru" },
+        { "url": "/images/olga/1bedroom/880632506.jpg", "alt": "Kuhinja s pisanimi ploščicami, koritom in oknom na vrt" },
+        { "url": "/images/olga/1bedroom/880632608.jpg", "alt": "Jedilni prostor z mizo, rumeno steno in retro hladilnikom" },
+        { "url": "/images/olga/1bedroom/880632974.jpg", "alt": "Lesena jedilna miza pred rumeno steno z uokvirjenimi grafikami" },
+        { "url": "/images/olga/1bedroom/880632913.jpg", "alt": "Kuhinjske police s kozarci, skodelicami in kuhalnikom za vodo" },
+        { "url": "/images/olga/1bedroom/880633986.jpg", "alt": "Spalnica s klimatsko napravo, odprto garderobo in oknom v zelenje" },
+        { "url": "/images/olga/1bedroom/880632679.jpg", "alt": "Televizor na steni, komoda in rdeč stolček ob prehodu v predsobo" },
+        { "url": "/images/olga/1bedroom/880634121.jpg", "alt": "Uokvirjena grafika nad blazinami s cvetličnim vzorcem" }
+      ]
+    },
+    {
+      "id": "studio-two",
+      "name": "Studio 2",
+      "type": "Studio",
+      "maxGuests": 2,
+      "bathrooms": 1,
+      "rooms": [
+        { "name": "Spalni prostor", "sleeps": 2, "beds": "1 velika zakonska postelja" }
+      ],
+      "amenities": [
+        "Zasebna kopalnica",
+        "Manjša kuhinja"
+      ],
+      "photos": [
+        { "url": "/images/olga/studio2/880802302.jpg", "alt": "Postelja z leseno oblogo vzglavja pred rumeno steno v drugem studiu" },
+        { "url": "/images/olga/studio2/880802028.jpg", "alt": "Kuhinjska niša z vitrajnim okencem, koritom in retro hladilnikom" },
+        { "url": "/images/olga/studio2/880802080.jpg", "alt": "Modra okrogla miza in odprti garderobni omari v bivalnem prostoru" },
+        { "url": "/images/olga/studio2/880801951.jpg", "alt": "Modra jedilna miza s stoli pod grafiko z limonami" },
+        { "url": "/images/olga/studio2/880802487.jpg", "alt": "Jedilni kotiček z uokvirjeno grafiko in vrati v predsobo" }
+      ]
+    }
+  ],
+  "bookingUrl": "https://www.booking.com/hotel/si/apartments-olga.en-gb.html",
+  "translations": {
+    "en": {
+      "type": "Guest house",
+      "description": "A peaceful garden house in Bled with three self-contained accommodation units, private parking, and free Wi-Fi.",
+      "country": "Slovenia",
+      "amenities": [
+        "Free Wi-Fi",
+        "Private parking",
+        "Garden",
+        "Terrace"
+      ],
+      "photoAlts": [
+        "Covered terrace with a table and chairs outside the entrance",
+        "The Apartments Olga garden house with its paved courtyard and covered entrance",
+        "Vine-shaded terrace with a table and wicker chairs beside the garden steps",
+        "Garden with a wooden hut and fruit trees",
+        "Garden table and chairs in the shade of the spruce",
+        "Cobbled garden path past lavender and a grapevine",
+        "Roses and wisteria climbing beside the house entrance",
+        "Wrought-iron bench with petunias in front of the house",
+        "Hydrangeas and roses along the white fence in the courtyard"
+      ],
+      "units": {
+        "studio-one": {
+          "rooms": [
+            { "name": "Sleeping area", "beds": "1 large double bed" }
+          ],
+          "amenities": [
+            "Private bathroom",
+            "Kitchenette"
+          ],
+          "photoAlts": [
+            "Double bed with a wrought-iron headboard against the floral wallpaper in the studio",
+            "Kitchenette with yellow tiles, a sink and a hob",
+            "Dining nook with a white table, a corner bench and lemon-print cushions",
+            "White dining table with a lemon-print runner and a woven basket"
+          ]
+        },
+        "one-bedroom-apartment": {
+          "name": "One-bedroom apartment",
+          "type": "Apartment",
+          "rooms": [
+            { "name": "Bedroom", "beds": "1 large double bed" }
+          ],
+          "amenities": [
+            "Private bathroom",
+            "Kitchen"
+          ],
+          "photoAlts": [
+            "Double bed with a wrought-iron frame beneath the round window",
+            "Bedroom with two bedside tables and reading lamps",
+            "Living area with a daybed, floral cushions and an open wardrobe",
+            "Daybed, mirror and television in the living area",
+            "Kitchen with colourful tiles, a sink and a window onto the garden",
+            "Dining area with a table, a yellow feature wall and a retro fridge",
+            "Wooden dining table against the yellow wall with framed prints",
+            "Kitchen shelves with glasses, bowls and a kettle",
+            "Bedroom with air conditioning, open wardrobe shelves and a window onto greenery",
+            "Wall-mounted television, chest of drawers and a red chair by the hallway",
+            "Framed print above floral-patterned cushions"
+          ]
+        },
+        "studio-two": {
+          "rooms": [
+            { "name": "Sleeping area", "beds": "1 large double bed" }
+          ],
+          "amenities": [
+            "Private bathroom",
+            "Kitchenette"
+          ],
+          "photoAlts": [
+            "Bed with a wooden headboard against the yellow wall in the second studio",
+            "Kitchenette with a stained-glass window, a sink and a retro fridge",
+            "Round blue table and open wardrobes in the living space",
+            "Blue dining table and chairs beneath a lemon print",
+            "Dining corner with a framed print and the door to the hallway"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+---
+import type { Property } from '../domain/property';
+import type { SiteConfig, SectionId } from '../config/site';
+import type { Locale } from '../i18n';
+import { lightboxPhotos } from '../lib/images';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Intro from './Intro.astro';
+import PropertyGallery from './PropertyGallery.astro';
+import Units from './Units.astro';
+import UnitLightbox from './UnitLightbox.astro';
+import Amenities from './Amenities.astro';
+import Location from './Location.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+
+interface Props { property: Property; config: SiteConfig; locale: Locale }
+const { property, config, locale } = Astro.props;
+const enabled = (section: SectionId) => config.sections.includes(section);
+const personalContact = config.contact.type === 'personal' || config.contact.type === 'both';
+const bookingContact = config.contact.type === 'booking' || config.contact.type === 'both';
+
+/**
+ * Gallery 0 is the house and garden; each unit follows in order. The lightbox addresses
+ * galleries by this index, so the mosaics and the viewer stay in step.
+ */
+const galleries = [
+  { name: property.name, photos: property.photos },
+  ...property.units.map((unit) => ({
+    name: unit.name,
+    photos: unit.photos.length ? unit.photos : property.photos,
+  })),
+];
+const lightboxGalleries = await Promise.all(galleries.map(async (gallery) => ({
+  name: gallery.name,
+  photos: await lightboxPhotos(gallery.photos, gallery.name),
+})));
+const showHouseGallery = property.photos.length > 1;
+const designStyle = `--ink:${config.design.colors.text};--muted:${config.design.colors.muted};--paper:${config.design.colors.background};--soft:${config.design.colors.surface};--moss:${config.design.colors.primary};--clay:${config.design.colors.accent};--font-display:${JSON.stringify(config.design.fonts.heading)},Georgia,serif;--font-body:${JSON.stringify(config.design.fonts.body)},system-ui,sans-serif`;
+---
+<div data-edges={config.design.edges} style={designStyle}>
+  <Header {property} {config} {locale} />
+  <main>
+    <Hero {property} {locale} />
+    {enabled('intro') && <Intro {property} {locale} />}
+    {showHouseGallery && <PropertyGallery {property} {locale} galleryIndex={0} />}
+    {enabled('units') && property.units.length > 0 && <Units {property} {locale} firstGalleryIndex={1} />}
+    {enabled('amenities') && property.amenities.length > 0 && <Amenities amenities={property.amenities} {locale} />}
+    {enabled('location') && <Location {property} {locale} />}
+    {enabled('contact') && <Contact {property} {locale} {personalContact} {bookingContact} />}
+  </main>
+  <Footer {property} {personalContact} />
+  <UnitLightbox galleries={lightboxGalleries} {locale} />
+</div>

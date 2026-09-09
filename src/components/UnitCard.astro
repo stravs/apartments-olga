@@ -1,0 +1,56 @@
+---
+import type { PropertyUnit } from '../domain/property';
+import type { Locale } from '../i18n';
+import { useTranslations } from '../i18n';
+import { resolvePhotos } from '../lib/images';
+import PhotoMosaic from './PhotoMosaic.astro';
+
+interface Props {
+  unit: PropertyUnit;
+  galleryIndex: number;
+  bookingUrl: string;
+  locale: Locale;
+}
+const { unit, galleryIndex, bookingUrl, locale } = Astro.props;
+const t = useTranslations(locale);
+const photos = resolvePhotos(unit.photos, unit.name);
+const facts = [
+  unit.maxGuests ? t('upToGuests', { count: unit.maxGuests }) : undefined,
+  unit.bedrooms ? t('bedrooms', { count: unit.bedrooms }) : undefined,
+  unit.bathrooms ? t('bathrooms', { count: unit.bathrooms }) : undefined,
+  unit.areaSquareMetres ? `${unit.areaSquareMetres} m²` : undefined,
+].filter((fact): fact is string => Boolean(fact));
+---
+<article class="unit-card" id={`unit-${unit.id}`}>
+  {photos.length > 0 && <PhotoMosaic {photos} {galleryIndex} label={unit.name} {locale} />}
+  <div class="unit-body">
+    <div class="unit-main">
+      <p class="eyebrow">{unit.type ?? t('unit')}</p>
+      <h3>{unit.name}</h3>
+      {unit.description && <p class="unit-description">{unit.description}</p>}
+      {unit.rooms.length > 0 && (
+        <dl class="unit-rooms">
+          {unit.rooms.map((room) => (
+            <div>
+              <dt>{room.name}</dt>
+              <dd>{[room.beds, room.sleeps ? t('sleepsCount', { count: room.sleeps }) : undefined].filter(Boolean).join(' · ')}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      <a class="primary-button" href={unit.bookingUrl ?? bookingUrl} target="_blank" rel="noopener">{t('bookUnit')}</a>
+    </div>
+    <div class="unit-aside">
+      {facts.length > 0 && (
+        <ul class="unit-chips" aria-label={`${unit.name} — ${t('unitFacts')}`}>
+          {facts.map((fact) => <li>{fact}</li>)}
+        </ul>
+      )}
+      {unit.amenities.length > 0 && (
+        <ul class="unit-amenities">
+          {unit.amenities.map((amenity) => <li><span aria-hidden="true">✓</span>{amenity}</li>)}
+        </ul>
+      )}
+    </div>
+  </div>
+</article>

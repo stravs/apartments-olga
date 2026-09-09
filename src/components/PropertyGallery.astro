@@ -1,0 +1,23 @@
+---
+import type { Property } from '../domain/property';
+import type { Locale } from '../i18n';
+import { useTranslations } from '../i18n';
+import { resolvePhotos } from '../lib/images';
+import PhotoMosaic from './PhotoMosaic.astro';
+
+interface Props { property: Property; locale: Locale; galleryIndex: number }
+const { property, locale, galleryIndex } = Astro.props;
+const t = useTranslations(locale);
+const photos = resolvePhotos(property.photos, property.name);
+---
+<section class="section house-section" id="house">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">{t('aroundTheHouse')}</p>
+      <h2>{t('houseAndGarden')}</h2>
+    </div>
+    <p>{t('photosCount', { count: photos.length })}</p>
+  </div>
+  <p class="lead">{t('houseAndGardenCopy')}</p>
+  <PhotoMosaic {photos} {galleryIndex} label={property.name} {locale} />
+</section>

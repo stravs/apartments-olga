@@ -1,0 +1,50 @@
+---
+import { Picture } from 'astro:assets';
+import type { Property } from '../domain/property';
+import type { Locale } from '../i18n';
+import { useTranslations } from '../i18n';
+import { resolvePhoto, widthsFor } from '../lib/images';
+
+interface Props { property: Property; locale: Locale }
+const { property, locale } = Astro.props;
+const t = useTranslations(locale);
+const source = property.photos[0];
+const hero = source ? resolvePhoto(source, property.name) : undefined;
+/** Gallery 0 is the house and garden, so the hero can open it directly. */
+const galleryCount = property.photos.length;
+---
+<section class:list={["hero", { "hero--empty": !hero }]} aria-labelledby="property-title">
+  <div class="hero-media">
+    {hero ? (
+      <Picture
+        src={hero.image}
+        formats={['avif', 'webp']}
+        widths={widthsFor(hero.image, [640, 960, 1440])}
+        sizes="100vw"
+        alt={hero.alt}
+        loading="eager"
+        decoding="sync"
+        fetchpriority="high"
+      />
+    ) : (
+      <div class="image-empty">{t('propertyPhoto')}</div>
+    )}
+  </div>
+  <div class="hero-card">
+    <p class="eyebrow">{property.type ?? t('accommodation')} · {property.city}</p>
+    <h1 id="property-title">{property.name}</h1>
+    <p>{property.description.split(/(?<=[.!?])\s/)[0]}</p>
+    <div class="hero-actions">
+      <a class="primary-button" href={property.bookingUrl} target="_blank" rel="noopener">{t('reserve')}</a>
+      {galleryCount > 1 && (
+        <button
+          class="hero-gallery-link"
+          type="button"
+          data-gallery-index="0"
+          data-photo-index="0"
+          aria-label={`${t('openGallery')} ${property.name}`}
+        >{t('photosCount', { count: galleryCount })}</button>
+      )}
+    </div>
+  </div>
+</section>

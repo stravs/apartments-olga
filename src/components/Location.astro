@@ -1,0 +1,29 @@
+---
+import type { Property } from '../domain/property';
+import { propertyLocation } from '../domain/property';
+import type { Locale } from '../i18n';
+import { useTranslations } from '../i18n';
+
+interface Props { property: Property; locale: Locale }
+const { property, locale } = Astro.props;
+const t = useTranslations(locale);
+const location = propertyLocation(property);
+/** Coordinates are preferred, but an address query keeps a real map on the page without them. */
+const mapQuery = property.latitude !== undefined && property.longitude !== undefined
+  ? `${property.latitude},${property.longitude}`
+  : location;
+---
+{location && <section class="section location" id="location">
+  <div>
+    <p class="eyebrow">{t('location')}</p>
+    <h2>{property.city ?? property.country}</h2>
+    <p class="lead">{location}</p>
+    <p>{t('locationCopy')}</p>
+  </div>
+  <iframe
+    src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=15&output=embed`}
+    title={`${t('mapOf')} ${property.name}`}
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</section>}

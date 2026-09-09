@@ -1,0 +1,48 @@
+---
+import { Picture } from 'astro:assets';
+import type { ResolvedPhoto } from '../lib/images';
+import { widthsFor } from '../lib/images';
+import type { Locale } from '../i18n';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  photos: ResolvedPhoto[];
+  /** Index of this gallery inside the page's lightbox galleries. */
+  galleryIndex: number;
+  label: string;
+  locale: Locale;
+  eager?: boolean;
+}
+const { photos, galleryIndex, label, locale, eager = false } = Astro.props;
+const t = useTranslations(locale);
+
+/** One lead photo plus four supporting tiles; the rest stay reachable through the lightbox. */
+const tiles = photos.slice(0, 5);
+const hidden = photos.length - tiles.length;
+const leadSizes = '(max-width: 900px) 100vw, (max-width: 1280px) 46vw, 600px';
+const tileSizes = '(max-width: 900px) 50vw, (max-width: 1280px) 23vw, 300px';
+---
+<div class="photo-mosaic" data-tiles={tiles.length} data-photo-count={photos.length}>
+  {tiles.map((photo, index) => (
+    <button
+      class:list={["mosaic-tile", { "mosaic-tile--lead": index === 0 }]}
+      type="button"
+      data-gallery-index={galleryIndex}
+      data-photo-index={index}
+      aria-label={`${t('openGallery')} ${label} — ${photo.alt}`}
+    >
+      <Picture
+        src={photo.image}
+        formats={['avif', 'webp']}
+        widths={widthsFor(photo.image, index === 0 ? [480, 640, 960] : [240, 320, 480])}
+        sizes={index === 0 ? leadSizes : tileSizes}
+        alt={photo.alt}
+        loading={eager && index === 0 ? 'eager' : 'lazy'}
+        decoding={eager && index === 0 ? 'sync' : 'async'}
+      />
+      {hidden > 0 && index === tiles.length - 1 && (
+        <span class="mosaic-more" aria-hidden="true">+{hidden}<small>{t('photos', { count: hidden })}</small></span>
+      )}
+    </button>
+  ))}
+</div>
