@@ -156,10 +156,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 
 .primary-button.light:hover { background: var(--cream); border-color: var(--cream) }
 
-/* --- Hero ------------------------------------------------------------------
-   Two gently angled faces fold inward at a shaded vertical corner.
-   A shallow perspective keeps the copy comfortable to read.
-   -------------------------------------------------------------------------- */
+/* --- Hero: flat photo and text panels -------------------------------------- */
 .hero {
   position: relative;
   display: grid;
@@ -167,26 +164,12 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   width: 100%;
   margin: 24px auto 56px;
   min-height: clamp(480px, 43vw, 640px);
-  perspective: 1800px;
-  perspective-origin: 61.8034% 50%;
-  overflow-x: clip;
 }
 
 .hero-media {
   position: relative;
   min-height: 100%;
   overflow: hidden;
-  transform-origin: right center;
-  transform: rotateY(10deg);
-  box-shadow: -16px 26px 36px -24px color-mix(in srgb, var(--ink) 35%, transparent);
-}
-
-.hero-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent 65%, rgb(0 0 0 / .14));
 }
 
 .hero-media,
@@ -200,27 +183,12 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 }
 
 .hero-card {
-  position: relative;
-  isolation: isolate;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-width: 0;
   padding: 72px clamp(24px, 3vw, 56px);
-}
-
-/* Only the backdrop folds; text and controls stay in the screen plane. */
-.hero-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  transform-origin: left center;
-  transform: perspective(1800px) rotateY(-10deg);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--soft) 91%, var(--ink)), var(--soft) 12%, color-mix(in srgb, var(--soft) 96%, var(--paper)));
-  border-left: 1px solid color-mix(in srgb, var(--ink) 18%, var(--soft));
-  box-shadow: 18px 26px 36px -24px color-mix(in srgb, var(--ink) 35%, transparent);
+  background: var(--soft);
 }
 
 .hero-card h1 { font-size: clamp(2.5rem, 4vw, 4.6rem) }
@@ -943,26 +911,9 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
 /* --- Responsive: tablet --------------------------------------------------- */
 @media (max-width: 900px) {
   .section, .footer { padding-left: 24px; padding-right: 24px }
-  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; margin-bottom: 36px; perspective: none }
-  /* Turn the fold onto its horizontal axis; both faces share the same seam. */
-  .hero-media {
-    min-height: 380px;
-    transform-origin: center bottom;
-    transform: perspective(1200px) rotateX(-10deg) scaleX(.96);
-    box-shadow: 0 -16px 36px -24px color-mix(in srgb, var(--ink) 35%, transparent);
-  }
-  .hero-media::after {
-    background: linear-gradient(180deg, transparent 65%, rgb(0 0 0 / .14));
-  }
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; margin-bottom: 36px }
+  .hero-media { min-height: 380px }
   .hero-card { padding: 48px 32px 52px }
-  .hero-card::before {
-    transform-origin: center top;
-    transform: perspective(1200px) rotateX(10deg) scaleX(.96);
-    background: linear-gradient(180deg, color-mix(in srgb, var(--soft) 91%, var(--ink)), var(--soft) 12%, color-mix(in srgb, var(--soft) 96%, var(--paper)));
-    border-left: 0;
-    border-top: 1px solid color-mix(in srgb, var(--ink) 18%, var(--soft));
-    box-shadow: 0 26px 36px -24px color-mix(in srgb, var(--ink) 35%, transparent);
-  }
 
   .photo-mosaic {
     grid-template-columns: repeat(2, minmax(0, 1fr));
