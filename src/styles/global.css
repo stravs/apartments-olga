@@ -180,6 +180,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3.2rem, 6.5vw, 6.4rem); 
   height: 100%;
   object-fit: cover;
   object-position: center 52%;
+  transform: rotate(-1.2deg) scale(1.04);
 }
 
 .hero-card {
