@@ -88,29 +88,25 @@
   ],
   "nearby": [
     {
-      "name": "Restavracija Topolino",
-      "distance": "700 m"
+      "name": "Triglav National Park Info Centre",
+      "distance": "500 m"
     },
     {
-      "name": "Bar Lastovka",
-      "distance": "800 m"
+      "name": "Shops",
+      "distance": "600 m"
     },
     {
-      "name": "Gostilna Union",
-      "distance": "800 m"
+      "name": "Oštarija Peglez'n",
+      "distance": "1.1 km"
+    },
+    {
+      "name": "Pub Kitchen",
+      "distance": "1.2 km"
     },
     {
       "name": "Lake Bled",
       "distance": "1.3 km",
       "major": true
-    },
-    {
-      "name": "Bled Festival Hall",
-      "distance": "1.5 km"
-    },
-    {
-      "name": "Grajska beach",
-      "distance": "1.8 km"
     },
     {
       "name": "Bled Castle",
@@ -326,9 +322,9 @@
   ],
   "narrative": {
     "heroEyebrow": "Bled · Slovenia",
-    "heroTitle": "A garden house\non a quiet street in Bled.",
+    "heroTitle": "A colourful home\nin Bled.",
     "heroText": "Two studios and a one-bedroom apartment, each with a private entrance, its own kitchen and a terrace onto the garden. Free parking at the house; Lake Bled is 1.3 km away.",
-    "introTitle": "A home in Bled, not a hotel room.",
+    "introTitle": "Your own place, not a hotel room.",
     "introText": "The rooms are bright and full of colour: painted walls, patterned tiles, framed prints. Every apartment has its own kitchen or kitchenette with a dishwasher and microwave, so breakfast can be slow and dinner can be outside.",
     "highlights": [
       {
@@ -354,7 +350,7 @@
     "spacesTitle": "Three ways to stay.",
     "spacesText": "Two studios for two, and a one-bedroom apartment for up to three. All on the ground floor, all with a terrace onto the garden.",
     "settingTitle": "A quiet street, a short walk from the lake.",
-    "settingText": "Finžgarjeva cesta is a quiet residential street in Bled. Restaurants are under a kilometre away, and Lake Bled is 1.3 km from the gate.",
+    "settingText": "Finžgarjeva cesta is a quiet residential street in Bled. Restaurants are about a kilometre away, and Lake Bled is 1.3 km from the gate.",
     "practical": [
       {
         "label": "Check-in and check-out",

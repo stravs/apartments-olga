@@ -37,29 +37,25 @@
   ],
   "nearby": [
     {
-      "name": "Restavracija Topolino",
-      "distance": "700 m"
+      "name": "Infocenter Triglavskega narodnega parka",
+      "distance": "500 m"
     },
     {
-      "name": "Bar Lastovka",
-      "distance": "800 m"
+      "name": "Trgovine",
+      "distance": "600 m"
     },
     {
-      "name": "Gostilna Union",
-      "distance": "800 m"
+      "name": "Oštarija Peglez'n",
+      "distance": "1,1 km"
+    },
+    {
+      "name": "Pub Kitchen",
+      "distance": "1,2 km"
     },
     {
       "name": "Blejsko jezero",
       "distance": "1,3 km",
       "major": true
-    },
-    {
-      "name": "Festivalna dvorana Bled",
-      "distance": "1,5 km"
-    },
-    {
-      "name": "Grajsko kopališče",
-      "distance": "1,8 km"
     },
     {
       "name": "Blejski grad",
@@ -81,9 +77,9 @@
   ],
   "narrative": {
     "heroEyebrow": "Bled · Slovenija",
-    "heroTitle": "Hiša z vrtom\nna mirni ulici na Bledu.",
+    "heroTitle": "Barvit dom\nna Bledu.",
     "heroText": "Dva studia in apartma z eno spalnico, vsak z ločenim vhodom, svojo kuhinjo in teraso na vrt. Brezplačno parkiranje pri hiši; do Blejskega jezera je 1,3 km.",
-    "introTitle": "Dom na Bledu, ne hotelska soba.",
+    "introTitle": "Vaš prostor, ne hotelska soba.",
     "introText": "Sobe so svetle in polne barv: pobarvane stene, vzorčaste ploščice, slike v okvirjih. Vsak apartma ima svojo kuhinjo ali čajno kuhinjo s pomivalnim strojem in mikrovalovno pečico, zato je zajtrk lahko počasen, večerja pa zunaj.",
     "highlights": [
       {
@@ -102,7 +98,7 @@
     "spacesTitle": "Trije načini bivanja.",
     "spacesText": "Dva studia za dva in apartma z eno spalnico za največ tri. Vsi v pritličju, vsi s teraso na vrt.",
     "settingTitle": "Mirna ulica, kratek sprehod do jezera.",
-    "settingText": "Finžgarjeva cesta je mirna stanovanjska ulica na Bledu. Restavracije so manj kot kilometer stran, do Blejskega jezera pa je od vrat 1,3 km.",
+    "settingText": "Finžgarjeva cesta je mirna stanovanjska ulica na Bledu. Restavracije so približno kilometer stran, do Blejskega jezera pa je od vrat 1,3 km.",
     "practical": [
       {
         "label": "Prihod in odhod",

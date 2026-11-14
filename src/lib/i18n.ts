@@ -103,6 +103,8 @@ const en = {
   loadMore: 'Load more photos',
   checkIn: 'Check-in',
   checkOut: 'Check-out',
+  arrival: 'Arrival',
+  backToTop: 'Back to top',
   enquiryLead: ['Dates, beds, a cot for the little one?', 'Just ask.'],
   weSpeak: (languages: string[]) => `We speak ${list(languages, 'and')}.`,
 };
@@ -198,6 +200,8 @@ const sl: Strings = {
   loadMore: 'Naloži več fotografij',
   checkIn: 'Prijava',
   checkOut: 'Odjava',
+  arrival: 'Prihod',
+  backToTop: 'Na vrh',
   enquiryLead: ['Datumi, ležišča, posteljica za najmlajše?', 'Kar vprašajte.'],
   weSpeak: (languages) => `Govorimo ${list(languages, 'in')}.`,
 };

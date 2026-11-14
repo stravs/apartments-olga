@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
 import { Font } from 'astro:assets';
-import { fullAddress, unitPath, type Property, type PropertyUnit } from '../lib/property';
+import { fullAddress, mapsUrl, unitPath, type Property, type PropertyUnit } from '../lib/property';
 import { getSiteConfig } from '../lib/site';
 import { alternatePath, localePath, strings, toLocale } from '../lib/i18n';
 
@@ -30,6 +30,8 @@ const absolute = (path: string) => new URL(path, Astro.site).href;
 const href = (path: string) => localePath(locale, path);
 const navLink = 'rounded-full px-3 py-2 hover:bg-ink/5 aria-[current=page]:bg-ink/5';
 const enquiryHref = enquiry ? '#enquiry' : href('/#enquiry');
+const brand = property.name.replace(/^Apartments\s+/i, '');
+const footerLabel = 'text-xs font-bold tracking-[.2em] uppercase opacity-70';
 ---
 <!doctype html>
 <html lang={t.htmlLang}>
@@ -120,21 +122,45 @@ const enquiryHref = enquiry ? '#enquiry' : href('/#enquiry');
       </div>
     </section>
 
-    <footer class="bg-deep text-paper/80">
-      <div class="mx-auto grid max-w-7xl gap-10 border-t border-paper/15 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div class="[&_a]:text-paper [&_.text-muted]:text-paper/60">
-          <Logo name={property.name} href={href('/')} label={t.home(property.name)} />
+    <footer class="bg-deep px-3 pb-3 sm:px-5 sm:pb-5">
+      <div class="rounded-[2rem] bg-mustard text-ink">
+        <div class="mx-auto grid max-w-7xl gap-10 px-5 pt-14 pb-12 sm:grid-cols-2 sm:px-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <a href={href('/')} aria-label={t.home(property.name)} class="self-start leading-none">
+            <span class="soft-serif block text-7xl font-semibold italic sm:text-8xl">{brand}</span>
+            <span class="mt-3 block text-xs font-semibold tracking-[.22em] uppercase">apartments · {property.city}</span>
+          </a>
+          <div>
+            <p class={footerLabel}>{t.location}</p>
+            <address class="mt-4 not-italic">
+              {fullAddress(property)}
+              <a href={mapsUrl(property)} target="_blank" rel="noopener noreferrer" class="link mt-2 block font-semibold">{t.directions}</a>
+              {property.email && <a href={`mailto:${property.email}`} class="link mt-2 block font-semibold">{property.email}</a>}
+            </address>
+          </div>
+          <div>
+            <p class={footerLabel}>{t.apartments}</p>
+            <ul class="mt-4 space-y-2">
+              {property.units.map((item) => <li><a href={href(unitPath(item.id))} class="link font-semibold">{item.name}</a></li>)}
+            </ul>
+          </div>
+          {(property.checkIn || property.checkOut) && (
+            <div>
+              <p class={footerLabel}>{t.arrival}</p>
+              <dl class="mt-4 space-y-2">
+                {property.checkIn && <div class="flex justify-between gap-4"><dt>{t.checkIn}</dt><dd class="font-semibold tabular-nums">{property.checkIn}</dd></div>}
+                {property.checkOut && <div class="flex justify-between gap-4"><dt>{t.checkOut}</dt><dd class="font-semibold tabular-nums">{property.checkOut}</dd></div>}
+              </dl>
+            </div>
+          )}
         </div>
-        <address class="not-italic">
-          {fullAddress(property)}
-          {property.email && <><br /><a href={`mailto:${property.email}`} class="link text-paper">{property.email}</a></>}
-        </address>
-        <ul class="space-y-1">
-          {property.units.map((item) => <li><a href={href(unitPath(item.id))} class="link text-paper">{item.name}</a></li>)}
-          <li><a href={otherPath} hreflang={other} lang={other} class="link text-paper">{strings(other).languageName}</a></li>
-        </ul>
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 border-t-2 border-ink/15 px-5 py-6 text-sm sm:px-10">
+          <p>© {new Date().getFullYear()} {property.name}</p>
+          <div class="flex gap-6 font-semibold">
+            <a href={otherPath} hreflang={other} lang={other} class="link">{strings(other).languageName}</a>
+            <a href="#" class="link">{t.backToTop} ↑</a>
+          </div>
+        </div>
       </div>
-      <p class="mx-auto max-w-7xl px-4 pb-10 text-sm text-paper/60 sm:px-6">© {new Date().getFullYear()} {property.name}</p>
     </footer>
 
     <script>
