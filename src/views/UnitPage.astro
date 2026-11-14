@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Photo from '../components/Photo.astro';
+import UnitCard from '../components/UnitCard.astro';
+import RatingStamp from '../components/RatingStamp.astro';
+import Accordion from '../components/Accordion.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { summary, unitFacts, unitFeatures, unitPath, type Property, type PropertyUnit } from '../lib/property';
+import { accommodation } from '../lib/structured-data';
+import { photoUrl } from '../lib/images';
+import { localePath, strings, toLocale } from '../lib/i18n';
+
+interface Props { property: Property; unit: PropertyUnit }
+const { property, unit } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const t = strings(locale);
+const story = property.narrative;
+const rating = property.bookingRating;
+// Only photos linked to this apartment; shared house and garden photos stay on the home page.
+const photos = unit.photos;
+const cover = photos[0];
+const [, ...rest] = photos;
+// Gallery shows photos in batches; "Load more" reveals the next batch.
+const batch = 8;
+const features = unitFeatures(unit);
+const otherUnits = property.units.filter((other) => other.id !== unit.id);
+const lake = property.nearby?.find((place) => place.major);
+
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const pageUrl = absolute(localePath(locale, unitPath(unit.id)));
+const homeUrl = absolute(localePath(locale, '/'));
+const images = await Promise.all(unit.photos.map(async (photo) => absolute(await photoUrl(photo.url))));
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { ...accommodation(unit, pageUrl, images), containedInPlace: { '@type': 'LodgingBusiness', '@id': `${homeUrl}#lodging`, name: property.name, url: homeUrl } },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: property.name, item: homeUrl },
+      { '@type': 'ListItem', position: 2, name: unit.name, item: pageUrl },
+    ] },
+  ],
+};
+const description = summary(`${unit.name}, ${property.name}, ${property.city}. ${unitFacts(unit).join(', ')}. ${unit.description ?? ''}`);
+---
+<Layout title={`${unit.name} | ${property.name}`} {description} image={images[0]} {jsonLd} {property} {unit}>
+  {/* Once the main actions scroll away, a slim bar keeps the enquiry one tap away. */}
+  <div class="fixed inset-x-0 bottom-0 z-20 translate-y-full border-t-2 border-ink/10 bg-paper/95 backdrop-blur transition-transform duration-300 ease-gentle data-show:translate-y-0" data-sticky-bar inert>
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
+      <p class="min-w-0 leading-tight"><strong class="soft-serif block truncate text-lg">{unit.name}</strong><span class="text-sm text-muted">{unitFacts(unit).slice(0, 2).join(' · ')}</span></p>
+      <button type="button" class="btn-primary px-5" data-unit={unit.id}>{t.enquire}</button>
+    </div>
+  </div>
+
+  <div class="px-3 sm:px-5">
+    <div class="rounded-[2rem] bg-mustard">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-10 sm:px-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:items-center lg:gap-16 lg:py-14">
+        <div class="md:order-2">
+          <a href={localePath(locale, '/#apartments')} class="link text-sm font-semibold">← {t.allApartments}</a>
+          <h1 id="unit-title" class="soft-serif mt-5 text-5xl leading-[1.02] font-medium sm:text-6xl">{unit.name}</h1>
+          {unit.setting && <p class="mt-3 text-lg">{unit.setting}</p>}
+          <ul class="mt-6 flex flex-wrap gap-2 font-semibold">
+            {unitFacts(unit).map((fact) => <li class="rounded-full bg-paper px-4 py-1.5">{fact}</li>)}
+          </ul>
+          <div class="mt-8 flex flex-wrap items-center gap-3" data-unit-actions>
+            <button type="button" class="btn-primary" data-unit={unit.id}>{t.enquireAbout}</button>
+          </div>
+          {rating && (
+            <a href={localePath(locale, '/#reviews')} class="group mt-8 inline-flex items-center gap-3 text-sm">
+              <RatingStamp {rating} {locale} class="shrink-0 -rotate-3 text-[1.1rem] transition-transform duration-500 ease-gentle group-hover:rotate-0" />
+              <span class="link font-semibold">{t.reviewsCount(rating.count)}</span>
+            </a>
+          )}
+        </div>
+
+        {cover && (
+          <>
+            {/* Phones: swipe through every photo. */}
+            <div class="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 md:hidden" tabindex="0" role="region" aria-label={t.swipePhotos(unit.name)}>
+              {photos.map((photo, index) => (
+                <button type="button" data-photo={index} class="postcard relative w-[78%] shrink-0 snap-center" aria-label={t.openPhoto(index + 1, photos.length)}>
+                  <Photo {photo} sizes="78vw" eager={index === 0} class="aspect-[3/4] w-full object-cover" />
+                </button>
+              ))}
+            </div>
+            {/* Tablets and up: the cover as a large postcard. */}
+            <div class="relative hidden md:order-1 md:block">
+              <div class="postcard absolute inset-0 translate-x-4 translate-y-4 rotate-[3deg] bg-paper" aria-hidden="true"></div>
+              <button type="button" data-photo="0" class="postcard group relative block w-full -rotate-1 cursor-zoom-in motion-safe:animate-drop" aria-label={t.openPhoto(1, photos.length)}>
+                <span class="block overflow-hidden"><Photo photo={cover} sizes="(max-width: 1024px) 46vw, 560px" eager class="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-gentle group-hover:scale-[1.03]" /></span>
+                <span class="absolute right-6 bottom-6 rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-lg">{t.showAllPhotos(photos.length)}</span>
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+
+  {rest.length > 0 && (
+    <section class="mx-auto mt-10 hidden max-w-7xl px-4 sm:px-6 md:block" aria-label={t.galleryLabel(unit.name)}>
+      <div class="grid grid-cols-3 gap-4 lg:grid-cols-4" data-gallery>
+        {rest.map((photo, offset) => {
+          const index = offset + 1;
+          return (
+            <button type="button" data-photo={index} hidden={offset >= batch} class="postcard group relative cursor-zoom-in transition-transform duration-500 ease-gentle hover:-translate-y-1 hover:-rotate-1" aria-label={t.openPhoto(index + 1, photos.length)}>
+              <span class="block overflow-hidden"><Photo {photo} sizes="(max-width: 1024px) 31vw, 300px" class="aspect-[3/4] w-full object-cover" /></span>
+            </button>
+          );
+        })}
+      </div>
+      {rest.length > batch && <button type="button" class="btn-outline mx-auto mt-8 flex" data-load-more data-batch={batch}>{t.loadMore}</button>}
+    </section>
+  )}
+
+  <div class="mx-auto max-w-7xl px-4 pt-20 sm:px-6">
+      <section data-reveal class="grid gap-x-16 gap-y-10 lg:grid-cols-2" aria-labelledby="details-title">
+        <div>
+        <h2 id="details-title" class="soft-serif text-4xl sm:text-5xl">{t.theApartment}</h2>
+        {unit.description && <p class="mt-5 max-w-2xl text-lg text-muted">{unit.description}</p>}
+        <dl class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {unit.areaSquareMetres && <div class="rounded-2xl bg-cream p-5"><dt class="text-sm font-semibold text-muted">{t.size}</dt><dd class="soft-serif mt-1 text-2xl">{unit.areaSquareMetres} m²</dd></div>}
+          {unit.occupancyLabel && <div class="rounded-2xl bg-cream p-5"><dt class="text-sm font-semibold text-muted">{t.sleeps}</dt><dd class="soft-serif mt-1 text-2xl">{unit.occupancyLabel}</dd></div>}
+          {unit.rooms.map((room) => room.beds && <div class="col-span-2 rounded-2xl bg-cream p-5"><dt class="text-sm font-semibold text-muted">{room.name}</dt><dd class="soft-serif mt-1 text-2xl">{room.beds}</dd></div>)}
+        </dl>
+        </div>
+        {features.length > 0 && (
+          <div>
+            <h3 class="text-sm font-bold tracking-[.2em] uppercase lg:mt-4">{t.inTheApartment}</h3>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {features.map((feature, index) => <li class:list={['rounded-full px-4 py-1.5', index < (unit.highlights?.length ?? 0) ? 'bg-lemon font-semibold' : 'border-2 border-ink/10']}>{feature}</li>)}
+            </ul>
+          </div>
+        )}
+      </section>
+
+      <div class="mt-20 grid gap-x-16 gap-y-20 border-t-2 border-ink pt-10 lg:grid-cols-2">
+      <section data-reveal aria-labelledby="shared-title">
+        <h2 id="shared-title" class="soft-serif text-4xl">{t.sharedTitle}</h2>
+        <p class="mt-3 text-muted">{t.aroundHouseText}</p>
+        <ul class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+          {story.highlights.map((item) => <li><strong class="soft-serif block text-2xl font-medium">{item.title}</strong><span class="mt-1 block text-muted">{item.text}</span></li>)}
+        </ul>
+        <p class="mt-8">
+          {property.city}{lake && <> · {t.toLake(lake.distance)}</>} · <a href={localePath(locale, '/#location')} class="link font-semibold">{t.seeLocation}</a>
+        </p>
+      </section>
+
+      <section id="good-to-know" data-reveal class="scroll-mt-4" aria-labelledby="good-to-know-title">
+        <h2 id="good-to-know-title" class="soft-serif text-4xl">{t.practicalTitle}</h2>
+        <div class="mt-8"><Accordion items={story.practical} /></div>
+      </section>
+      </div>
+  </div>
+
+  <section id="enquiry" class="mt-24 scroll-mt-4 px-4 sm:px-6" aria-labelledby="enquiry-title">
+    <div data-reveal class="mx-auto mb-10 max-w-5xl">
+      <h2 id="enquiry-title" class="soft-serif text-4xl sm:text-5xl">{t.formTitle}</h2>
+      <p class="mt-3 text-lg text-muted">{t.formText}</p>
+    </div>
+    <EnquiryForm {property} {locale} selected={unit.id} stampPhoto={cover} />
+  </section>
+
+  {otherUnits.length > 0 && (
+    <section id="other-apartments" class="mt-24 bg-cream py-20" aria-labelledby="other-title">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 id="other-title" data-reveal class="soft-serif text-4xl sm:text-5xl">{t.otherTitle}</h2>
+        <div class="mt-10 grid gap-6 lg:grid-cols-2 lg:gap-8">
+          {otherUnits.map((other, index) => <UnitCard unit={other} {locale} delay={index * 100} horizontal />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Lightbox {photos} title={unit.name} {locale} />
+
+  <script>
+    // Reveal the next batch of gallery photos; focus the first new one so keyboard users continue from there.
+    const more = document.querySelector<HTMLButtonElement>('[data-load-more]');
+    more?.addEventListener('click', () => {
+      const hidden = [...document.querySelectorAll<HTMLElement>('[data-gallery] > [hidden]')];
+      const next = hidden.slice(0, Number(more.dataset.batch));
+      next.forEach((item) => { item.hidden = false; });
+      next[0]?.focus();
+      if (hidden.length <= next.length) more.remove();
+    });
+
+    // Sticky bar: shown once the main actions scroll above the screen, hidden while the form or other apartments are in view.
+    const bar = document.querySelector<HTMLElement>('[data-sticky-bar]');
+    const actions = document.querySelector('[data-unit-actions]');
+    let pastActions = false;
+    const inView = new Set<Element>();
+    const update = () => {
+      const show = pastActions && inView.size === 0;
+      bar?.toggleAttribute('data-show', show);
+      if (bar) bar.inert = !show;
+    };
+    if (bar && actions) {
+      new IntersectionObserver(([entry]) => {
+        if (!entry) return;
+        pastActions = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        update();
+      }).observe(actions);
+      const hideAt = new IntersectionObserver((entries) => {
+        for (const entry of entries) entry.isIntersecting ? inView.add(entry.target) : inView.delete(entry.target);
+        update();
+      });
+      document.querySelectorAll('#enquiry, #other-apartments, footer').forEach((el) => hideAt.observe(el));
+    }
+  </script>
+</Layout>

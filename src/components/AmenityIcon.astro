@@ -1,0 +1,12 @@
+---
+interface Props { name: string; class?: string }
+const { name, class: className } = Astro.props;
+const paths: Record<string, string> = {
+  parking: 'M7 21V3h6.5a5 5 0 0 1 0 10H7',
+  kitchen: 'M4 10h16v5a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6v-5zM2 10h2m16 0h2M9.5 7c0-1.6 1-2 1-3.5m3.5 3.5c0-1.6 1-2 1-3.5',
+  leaf: 'M12 21V9m0 5c-7 0-8-7-8-7 7 0 8 4 8 7zm0 3c7 0 8-7 8-7-7 0-8 4-8 7z',
+  door: 'M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17M3 21h18M14.5 12.5v.01',
+  wifi: 'M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5v.01',
+};
+---
+<svg viewBox="0 0 24 24" fill="none" class={className} aria-hidden="true"><path d={paths[name] ?? paths.leaf} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>

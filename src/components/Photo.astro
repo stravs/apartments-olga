@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import { photoSource } from '../lib/images';
+import type { PropertyPhoto } from '../lib/property';
+
+interface Props {
+  photo: PropertyPhoto;
+  sizes: string;
+  /** Used when the photo has no alt text of its own. Pass "" for decorative repeats. */
+  fallbackAlt?: string;
+  /** Above-the-fold photo: load immediately with high priority. */
+  eager?: boolean;
+  class?: string;
+}
+const { photo, sizes, fallbackAlt, eager = false, class: className } = Astro.props;
+const src = photoSource(photo.url);
+// Booking photos are at most 1024px wide; steps below that serve phones a lighter file.
+const widths = [...[360, 480, 768].filter((w) => w < src.width), src.width];
+---
+<Image {src} {widths} {sizes} alt={fallbackAlt === '' ? '' : photo.alt ?? fallbackAlt ?? ''} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" class={className} />

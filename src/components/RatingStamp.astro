@@ -1,0 +1,18 @@
+---
+import type { Rating } from '../lib/property';
+import { formatScore, strings, type Locale } from '../lib/i18n';
+interface Props { rating: Rating; locale: Locale; class?: string }
+const { rating, locale, class: className } = Astro.props;
+const t = strings(locale);
+---
+{/* A postage stamp: perforated paper edge, framed score. Size scales with font-size (em). */}
+<span class:list={['inline-block drop-shadow-[0_6px_10px_rgb(20_60_65/.3)]', className]}>
+  <span class="stamp block bg-paper">
+    <span class="flex flex-col items-center border-[.08em] border-teal/70 px-[.7em] pt-[.45em] pb-[.5em] text-teal" aria-hidden="true">
+      <span class="text-[.42em] font-bold tracking-[.18em] uppercase">Booking.com</span>
+      <span class="soft-serif mt-[.05em] text-[2.1em] leading-none font-semibold">{formatScore(rating.value, locale)}</span>
+      <span class="mt-[.2em] text-[.5em] font-semibold">{rating.label}</span>
+    </span>
+    <span class="sr-only">{rating.label}: {formatScore(rating.value, locale)} {t.outOfTen}, {t.reviewsCount(rating.count)}</span>
+  </span>
+</span>

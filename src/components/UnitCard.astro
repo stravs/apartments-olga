@@ -1,0 +1,39 @@
+---
+import Photo from './Photo.astro';
+import { unitFacts, unitPath, type PropertyUnit } from '../lib/property';
+import { localePath, strings, type Locale } from '../lib/i18n';
+
+interface Props { unit: PropertyUnit; locale: Locale; delay?: number; /** Photo beside the text instead of above it. */ horizontal?: boolean }
+const { unit, locale, delay = 0, horizontal = false } = Astro.props;
+const t = strings(locale);
+const cover = unit.photos[0];
+const href = localePath(locale, unitPath(unit.id));
+---
+<article data-reveal style={`--reveal-delay:${delay}ms`} data-card
+  class:list={['group postcard relative transition duration-500 ease-gentle hover:-translate-y-1.5 data-[in-view]:-translate-y-1.5', horizontal ? 'grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)]' : 'flex flex-col']}>
+  {/* Photo repeats the title link: hidden from keyboard and screen readers so the unit is announced once. */}
+  <a {href} tabindex="-1" aria-hidden="true" class:list={['block overflow-hidden bg-cream', horizontal && 'h-full']}>
+    {cover
+      ? <Photo photo={cover} sizes={horizontal ? '(max-width: 1024px) 38vw, 240px' : '(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 380px'} fallbackAlt="" class:list={['w-full object-cover transition-transform duration-700 ease-gentle group-hover:scale-[1.04]', horizontal ? 'aspect-[4/5] h-full' : 'aspect-[4/5]']} />
+      : <span class="grid aspect-[4/5] place-items-center text-muted">{t.photosSoon}</span>}
+  </a>
+  <div class:list={['flex flex-1 flex-col', horizontal ? 'px-4 py-3 sm:px-6 sm:py-5' : 'px-3 pt-5 pb-4']}>
+    <h3 class:list={['soft-serif', horizontal ? 'text-2xl sm:text-3xl' : 'text-3xl']}><a {href} class="after:absolute after:inset-0 hover:text-teal">{unit.name}</a></h3>
+    {unit.setting && <p class="mt-1 text-sm text-muted">{unit.setting}</p>}
+    <ul class="mt-4 flex flex-wrap gap-1.5 text-sm font-semibold">
+      {unitFacts(unit).map((fact) => <li class="rounded-full bg-cream px-3 py-1">{fact}</li>)}
+    </ul>
+    <p class="mt-auto flex items-center justify-between pt-5 text-sm font-semibold text-teal">
+      <span>{t.detailsLink}</span><span class:list={['text-muted', horizontal && 'max-sm:hidden']}>{t.photoCount(unit.photos.length)}</span>
+    </p>
+  </div>
+</article>
+<script>
+  // Touch screens have no hover: lift the card crossing the middle of the screen instead.
+  if (matchMedia('(hover: none)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) entry.target.toggleAttribute('data-in-view', entry.isIntersecting);
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('[data-card]').forEach((card) => observer.observe(card));
+  }
+</script>

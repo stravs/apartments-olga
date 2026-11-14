@@ -1,0 +1,151 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { Font } from 'astro:assets';
+import { fullAddress, unitPath, type Property, type PropertyUnit } from '../lib/property';
+import { getSiteConfig } from '../lib/site';
+import { alternatePath, localePath, strings, toLocale } from '../lib/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string | undefined;
+  jsonLd?: Record<string, unknown> | undefined;
+  property: Property;
+  /** Set on a unit page: marks the current apartment in the menu. */
+  unit?: PropertyUnit;
+  /** Pages that must never be indexed (404): no canonical, no language alternates. */
+  noindex?: boolean;
+  /** False on pages without an enquiry form: enquiry links go to the home page form. */
+  enquiry?: boolean;
+}
+const { title, description, image, jsonLd, property, unit, noindex = false, enquiry = true } = Astro.props;
+const siteConfig = await getSiteConfig();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const locale = toLocale(Astro.currentLocale);
+const t = strings(locale);
+const other = locale === 'en' ? 'sl' : 'en';
+const otherPath = noindex ? localePath(other, '/') : alternatePath(Astro.url.pathname, other);
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const href = (path: string) => localePath(locale, path);
+const navLink = 'rounded-full px-3 py-2 hover:bg-ink/5 aria-[current=page]:bg-ink/5';
+const enquiryHref = enquiry ? '#enquiry' : href('/#enquiry');
+---
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {/* No preload: each family has latin and latin-ext files and the filter can't pick one, so the browser fetches only the subset a page uses. */}
+    <Font cssVariable="--font-fraunces" />
+    <Font cssVariable="--font-instrument" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#E3A82F" />
+    <meta name="description" content={description} />
+    {!noindex && <link rel="canonical" href={canonicalUrl} />}
+    {(siteConfig.site.preview || noindex) && <meta name="robots" content="noindex,nofollow" />}
+    {!noindex && <>
+      <link rel="alternate" hreflang="en" href={absolute(alternatePath(Astro.url.pathname, 'en'))} />
+      <link rel="alternate" hreflang="sl" href={absolute(alternatePath(Astro.url.pathname, 'sl'))} />
+      <link rel="alternate" hreflang="x-default" href={absolute(alternatePath(Astro.url.pathname, 'en'))} />
+    </>}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={property.name} />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:locale:alternate" content={strings(other).ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonicalUrl} />}
+    {image && <meta property="og:image" content={absolute(image)} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {/* Escape "<" so text containing "</script>" cannot end the tag. */}
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replaceAll('<', '\\u003c')} />}
+  </head>
+  <body class="bg-paper text-ink font-sans text-[1.0625rem] leading-relaxed antialiased">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">{t.skip}</a>
+
+    <header class="group/header relative z-30" data-header>
+      <div class="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Logo name={property.name} href={href('/')} label={t.home(property.name)} />
+        <button type="button" class="btn-outline px-5 py-2 md:hidden" aria-expanded="false" aria-controls="site-nav" data-menu data-open-label={t.close} data-closed-label={t.menu}>{t.menu}</button>
+        <nav id="site-nav" aria-label={t.mainNav}
+          class="absolute inset-x-3 top-[5.5rem] hidden flex-col gap-1 rounded-3xl bg-white p-4 text-lg font-semibold shadow-2xl group-data-open/header:flex md:static md:flex md:flex-row md:items-center md:gap-1 md:bg-transparent md:p-0 md:text-base md:shadow-none">
+          <div class="group/drop relative">
+            <a href={href('/#apartments')} class={navLink}>{t.apartments}</a>
+            {/* Desktop: drops down on hover or keyboard focus. Phone: listed under the link. */}
+            <ul class="mt-1 mb-2 ml-3 space-y-1 border-l-2 border-mustard pl-3 text-base font-medium md:invisible md:absolute md:left-0 md:top-full md:mt-0 md:ml-0 md:w-64 md:translate-y-1 md:rounded-2xl md:border-0 md:bg-white md:p-2 md:opacity-0 md:shadow-xl md:transition md:group-hover/drop:visible md:group-hover/drop:translate-y-0 md:group-hover/drop:opacity-100 md:group-focus-within/drop:visible md:group-focus-within/drop:translate-y-0 md:group-focus-within/drop:opacity-100">
+              {property.units.map((item) => <li><a href={href(unitPath(item.id))} aria-current={item.id === unit?.id ? 'page' : undefined} class="block rounded-xl px-3 py-2 hover:bg-cream aria-[current=page]:bg-cream">{item.name}</a></li>)}
+            </ul>
+          </div>
+          {property.bookingRating && <a href={href('/#reviews')} class={navLink}>{t.reviews}</a>}
+          <a href={href('/#location')} class={navLink}>{t.location}</a>
+          <a href={href('/#good-to-know')} class={navLink}>{t.goodToKnow}</a>
+          <a href={otherPath} hreflang={other} lang={other} class={navLink} aria-label={strings(other).languageName}>{strings(other).languageShort}</a>
+          <a href={enquiryHref} class="btn-primary mt-2 md:mt-0 md:ml-2" data-enquire>{t.enquire}</a>
+        </nav>
+      </div>
+    </header>
+    <script is:inline>
+      (() => {
+        const header = document.querySelector('[data-header]');
+        const toggle = header.querySelector('[data-menu]');
+        const setOpen = (open) => {
+          header.toggleAttribute('data-open', open);
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.textContent = open ? toggle.dataset.openLabel : toggle.dataset.closedLabel;
+        };
+        toggle.addEventListener('click', () => setOpen(!header.hasAttribute('data-open')));
+        header.querySelector('nav').addEventListener('click', (event) => { if (event.target.closest('a')) setOpen(false); });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setOpen(false); });
+      })();
+    </script>
+
+    <main id="main" class="overflow-x-clip">
+      <slot />
+    </main>
+
+    <section class="mt-24" aria-labelledby="cta-title">
+      <div class="tiles h-3" aria-hidden="true"></div>
+      <div class="bg-deep text-paper">
+        <div class="mx-auto flex max-w-7xl flex-col items-start gap-8 px-4 py-20 sm:px-6 lg:flex-row lg:items-end lg:justify-between">
+          <h2 id="cta-title" class="soft-serif text-5xl leading-[1.02] sm:text-6xl">{t.ctaTitle[0]}<br /><em class="text-lemon">{t.ctaTitle[1]}</em></h2>
+          <div class="flex flex-wrap gap-3">
+            <a href={enquiryHref} class="btn bg-lemon text-ink hover:bg-white" data-enquire>{t.enquire}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-deep text-paper/80">
+      <div class="mx-auto grid max-w-7xl gap-10 border-t border-paper/15 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div class="[&_a]:text-paper [&_.text-muted]:text-paper/60">
+          <Logo name={property.name} href={href('/')} label={t.home(property.name)} />
+        </div>
+        <address class="not-italic">
+          {fullAddress(property)}
+          {property.email && <><br /><a href={`mailto:${property.email}`} class="link text-paper">{property.email}</a></>}
+        </address>
+        <ul class="space-y-1">
+          {property.units.map((item) => <li><a href={href(unitPath(item.id))} class="link text-paper">{item.name}</a></li>)}
+          <li><a href={otherPath} hreflang={other} lang={other} class="link text-paper">{strings(other).languageName}</a></li>
+        </ul>
+      </div>
+      <p class="mx-auto max-w-7xl px-4 pb-10 text-sm text-paper/60 sm:px-6">© {new Date().getFullYear()} {property.name}</p>
+    </footer>
+
+    <script>
+      // Reveal [data-reveal] elements once they scroll into view (styles in global.css).
+      const targets = document.querySelectorAll('[data-reveal]');
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }), { rootMargin: '0px 0px -8% 0px' });
+      targets.forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,258 @@
+{
+  "description": "Dva studia in apartma z eno spalnico v hiši z vrtom na mirni ulici na Bledu. Vsak ima svojo kuhinjo, teraso s pogledom na vrt, brezplačen Wi-Fi in brezplačno zasebno parkirišče.",
+  "country": "Slovenija",
+  "languages": [
+    "slovensko",
+    "angleško",
+    "nemško"
+  ],
+  "bookingRating": {
+    "value": 9.1,
+    "label": "Izjemno",
+    "count": 72,
+    "url": "https://www.booking.com/hotel/si/apartments-olga.sl.html#tab-reviews",
+    "capturedAt": "2026-10-13"
+  },
+  "amenities": [
+    {
+      "icon": "parking",
+      "label": "Brezplačno zasebno parkirišče"
+    },
+    {
+      "icon": "kitchen",
+      "label": "Kuhinja v vsakem apartmaju"
+    },
+    {
+      "icon": "leaf",
+      "label": "Vrt in terasa"
+    },
+    {
+      "icon": "door",
+      "label": "Ločeni vhodi"
+    },
+    {
+      "icon": "wifi",
+      "label": "Brezplačen Wi-Fi"
+    }
+  ],
+  "nearby": [
+    {
+      "name": "Restavracija Topolino",
+      "distance": "700 m"
+    },
+    {
+      "name": "Bar Lastovka",
+      "distance": "800 m"
+    },
+    {
+      "name": "Gostilna Union",
+      "distance": "800 m"
+    },
+    {
+      "name": "Blejsko jezero",
+      "distance": "1,3 km",
+      "major": true
+    },
+    {
+      "name": "Festivalna dvorana Bled",
+      "distance": "1,5 km"
+    },
+    {
+      "name": "Grajsko kopališče",
+      "distance": "1,8 km"
+    },
+    {
+      "name": "Blejski grad",
+      "distance": "2,8 km",
+      "major": true
+    },
+    {
+      "name": "Blejski otok",
+      "distance": "3,3 km"
+    },
+    {
+      "name": "Soteska Vintgar",
+      "distance": "4,8 km"
+    },
+    {
+      "name": "Letališče Jožeta Pučnika Ljubljana",
+      "distance": "33 km"
+    }
+  ],
+  "narrative": {
+    "heroEyebrow": "Bled · Slovenija",
+    "heroTitle": "Hiša z vrtom\nna mirni ulici na Bledu.",
+    "heroText": "Dva studia in apartma z eno spalnico, vsak z ločenim vhodom, svojo kuhinjo in teraso na vrt. Brezplačno parkiranje pri hiši; do Blejskega jezera je 1,3 km.",
+    "introTitle": "Dom na Bledu, ne hotelska soba.",
+    "introText": "Sobe so svetle in polne barv: pobarvane stene, vzorčaste ploščice, slike v okvirjih. Vsak apartma ima svojo kuhinjo ali čajno kuhinjo s pomivalnim strojem in mikrovalovno pečico, zato je zajtrk lahko počasen, večerja pa zunaj.",
+    "highlights": [
+      {
+        "title": "Vaša vrata",
+        "text": "Vsak apartma ima ločen vhod."
+      },
+      {
+        "title": "Brezplačno parkiranje",
+        "text": "Zasebno parkirišče pri hiši, rezervacija ni potrebna."
+      },
+      {
+        "title": "Vaša kuhinja",
+        "text": "Pomivalni stroj, mikrovalovna pečica in grelnik vode v vsakem apartmaju."
+      }
+    ],
+    "spacesTitle": "Trije načini bivanja.",
+    "spacesText": "Dva studia za dva in apartma z eno spalnico za največ tri. Vsi v pritličju, vsi s teraso na vrt.",
+    "settingTitle": "Mirna ulica, kratek sprehod do jezera.",
+    "settingText": "Finžgarjeva cesta je mirna stanovanjska ulica na Bledu. Restavracije so manj kot kilometer stran, do Blejskega jezera pa je od vrat 1,3 km.",
+    "practical": [
+      {
+        "label": "Prihod in odhod",
+        "value": "Prijava 14:00–22:00, odjava 07:00–10:00. Vnaprej nam sporočite, kdaj boste prispeli."
+      },
+      {
+        "label": "Plačilo",
+        "value": "Samo gotovina."
+      },
+      {
+        "label": "Parkiranje",
+        "value": "Brezplačno zasebno parkirišče pri hiši. Rezervacija ni potrebna."
+      },
+      {
+        "label": "Otroci in ležišča",
+        "value": "Otroci vseh starosti so dobrodošli. Dodatnih ležišč ni; ali je mogoča otroška posteljica, je odvisno od apartmaja, zato vprašajte vnaprej."
+      },
+      {
+        "label": "Wi-Fi",
+        "value": "Brezplačen v vseh prostorih. Če potrebujete stabilno povezavo za delo, nas pred rezervacijo vprašajte."
+      },
+      {
+        "label": "Hišni ljubljenčki in kajenje",
+        "value": "Hišni ljubljenčki niso dovoljeni. Kajenje ni dovoljeno."
+      },
+      {
+        "label": "Jeziki",
+        "value": "Govorimo slovensko, angleško in nemško."
+      }
+    ]
+  },
+  "units": {
+    "studio-one": {
+      "name": "Studio 1",
+      "description": "Studio v pritličju z ločenim vhodom, jedilnim kotičkom s kotno klopjo in kavčem. Terasa pred vrati gleda na vrt in ima svojo mizo.",
+      "setting": "Pritličje · ločen vhod · terasa s pogledom na vrt",
+      "highlights": [
+        "Ločen vhod",
+        "Čajna kuhinja s pomivalnim strojem in mikrovalovno pečico",
+        "Jedilni kotiček"
+      ],
+      "occupancyLabel": "Do 2 osebi",
+      "rooms": [
+        {
+          "name": "Spalni del",
+          "sleeps": 2,
+          "beds": "1 zakonska postelja (queen)"
+        }
+      ],
+      "amenities": [
+        "Lastna kopalnica s tušem in sušilnikom za lase",
+        "Opremljena terasa s pogledom na vrt",
+        "Brezplačen Wi-Fi",
+        "TV",
+        "Ogrevanje",
+        "Posteljnina in brisače",
+        "Nekadilsko"
+      ]
+    },
+    "one-bedroom-apartment": {
+      "name": "Apartma z eno spalnico",
+      "description": "Največja možnost: ločena spalnica, dnevna soba z raztegljivim kavčem in kuhinja z oknom na vrt. Jejte za mizo ob rumeni steni ali zunaj na terasi.",
+      "setting": "Pritličje · ločena spalnica · terasa s pogledom na vrt",
+      "highlights": [
+        "Ločen vhod",
+        "Ločena spalnica",
+        "Kuhinja s hladilnikom, pomivalnim strojem in mikrovalovno pečico",
+        "Raztegljiv kavč v dnevni sobi"
+      ],
+      "occupancyLabel": "Do 3 osebe",
+      "rooms": [
+        {
+          "name": "Spalnica",
+          "sleeps": 2,
+          "beds": "1 zakonska postelja (queen)"
+        },
+        {
+          "name": "Dnevna soba",
+          "sleeps": 1,
+          "beds": "1 raztegljiv kavč"
+        }
+      ],
+      "amenities": [
+        "Lastna kopalnica s tušem in sušilnikom za lase",
+        "Opremljena terasa s pogledom na vrt",
+        "Brezplačen Wi-Fi",
+        "TV",
+        "Ogrevanje",
+        "Posteljnina in brisače",
+        "Nekadilsko"
+      ]
+    },
+    "studio-two": {
+      "name": "Studio 2",
+      "description": "Studio v pritličju z ločenim vhodom, okroglo modro mizo in čajno kuhinjo pod oknom iz barvnega stekla. Obroki na prostem so na opremljeni terasi ob vrtu.",
+      "setting": "Pritličje · ločen vhod · terasa s pogledom na vrt",
+      "highlights": [
+        "Ločen vhod",
+        "Čajna kuhinja s pomivalnim strojem in mikrovalovno pečico",
+        "Prostor za sedenje"
+      ],
+      "occupancyLabel": "Do 2 osebi",
+      "rooms": [
+        {
+          "name": "Spalni del",
+          "sleeps": 2,
+          "beds": "1 zakonska postelja (queen)"
+        }
+      ],
+      "amenities": [
+        "Lastna kopalnica s tušem in sušilnikom za lase",
+        "Opremljena terasa s pogledom na vrt",
+        "Brezplačen Wi-Fi",
+        "TV",
+        "Ogrevanje",
+        "Posteljnina in brisače",
+        "Nekadilsko"
+      ]
+    }
+  },
+  "photoAlts": {
+    "Bed with a wooden headboard against the yellow wall in the second studio": "Postelja z lesenim vzglavjem ob rumeni steni v drugem studiu",
+    "Bedroom with air conditioning, open wardrobe shelves and a window onto greenery": "Spalnica s klimatsko napravo, odprtimi policami in oknom v zelenje",
+    "Bedroom with two bedside tables and reading lamps": "Spalnica z dvema nočnima omaricama in lučkama za branje",
+    "Blue dining table and chairs beneath a lemon print": "Modra jedilna miza in stoli pod sliko z limonami",
+    "Cobbled garden path past lavender and a grapevine": "Tlakovana vrtna pot mimo sivke in vinske trte",
+    "Covered terrace with a table and chairs outside the entrance": "Pokrita terasa z mizo in stoli pred vhodom",
+    "Daybed, mirror and television in the living area": "Ležišče, ogledalo in televizor v dnevnem prostoru",
+    "Dining area with a table, a yellow feature wall and a retro fridge": "Jedilni prostor z mizo, rumeno steno in retro hladilnikom",
+    "Dining corner with a framed print and the door to the hallway": "Jedilni kotiček s sliko v okvirju in vrati v hodnik",
+    "Dining nook with a white table, a corner bench and lemon-print cushions": "Jedilni kotiček z belo mizo, kotno klopjo in blazinami z limonami",
+    "Double bed with a wrought-iron frame beneath the round window": "Zakonska postelja s kovanim ogrodjem pod okroglim oknom",
+    "Double bed with a wrought-iron headboard against the floral wallpaper in the studio": "Zakonska postelja s kovanim vzglavjem ob cvetlični tapeti v studiu",
+    "Framed print above floral-patterned cushions": "Slika v okvirju nad blazinami s cvetličnim vzorcem",
+    "Garden table and chairs in the shade of the spruce": "Vrtna miza in stoli v senci smreke",
+    "Garden with a wooden hut and fruit trees": "Vrt z leseno utico in sadnim drevjem",
+    "Hydrangeas and roses along the white fence in the courtyard": "Hortenzije in vrtnice ob beli ograji na dvorišču",
+    "Kitchen shelves with glasses, bowls and a kettle": "Kuhinjske police s kozarci, skledami in grelnikom vode",
+    "Kitchen with colourful tiles, a sink and a window onto the garden": "Kuhinja z barvnimi ploščicami, pomivalnim koritom in oknom na vrt",
+    "Kitchenette with a stained-glass window, a sink and a retro fridge": "Čajna kuhinja z oknom iz barvnega stekla, koritom in retro hladilnikom",
+    "Kitchenette with yellow tiles, a sink and a hob": "Čajna kuhinja z rumenimi ploščicami, koritom in kuhalno ploščo",
+    "Living area with a daybed, floral cushions and an open wardrobe": "Dnevni prostor z ležiščem, cvetličnimi blazinami in odprto omaro",
+    "Pink roses and hydrangeas in bloom in the garden": "Rožnate vrtnice in hortenzije v cvetu na vrtu",
+    "Roses and wisteria climbing beside the house entrance": "Vrtnice in glicinija ob vhodu v hišo",
+    "Round blue table and open wardrobes in the living space": "Okrogla modra miza in odprte omare v bivalnem prostoru",
+    "The Apartments Olga garden house with its paved courtyard and covered entrance": "Hiša apartmajev Olga s tlakovanim dvoriščem in pokritim vhodom",
+    "Vine-shaded terrace with a table and wicker chairs beside the garden steps": "Terasa v senci trte z mizo in pletenimi stoli ob vrtnih stopnicah",
+    "Wall-mounted television, chest of drawers and a red chair by the hallway": "Stenski televizor, predalnik in rdeč stol ob hodniku",
+    "White dining table with a lemon-print runner and a woven basket": "Bela jedilna miza s prtičkom z limonami in pleteno košaro",
+    "Wooden dining table against the yellow wall with framed prints": "Lesena jedilna miza ob rumeni steni s slikami v okvirjih",
+    "Wrought-iron bench with petunias in front of the house": "Kovana klop s petunijami pred hišo"
+  }
+}

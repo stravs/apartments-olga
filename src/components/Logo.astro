@@ -1,0 +1,12 @@
+---
+interface Props { name: string; href: string; label: string }
+const { name, href, label } = Astro.props;
+// "Apartments Olga" → "Olga"; the small line carries "apartments".
+const brand = name.replace(/^Apartments\s+/i, '');
+---
+<a {href} aria-label={label} class="inline-flex text-ink">
+  <span class="flex flex-col leading-none">
+    <span class="soft-serif text-[1.9rem] font-semibold italic">{brand}</span>
+    <span class="mt-1 text-[.68rem] font-semibold whitespace-nowrap uppercase tracking-[.22em] text-muted">apartments · Bled</span>
+  </span>
+</a>

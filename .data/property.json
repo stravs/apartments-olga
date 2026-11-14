@@ -1,0 +1,421 @@
+{
+  "name": "Apartments Olga",
+  "type": "Self-catering apartments",
+  "description": "Two studios and a one-bedroom apartment in a garden house on a quiet street in Bled, each with its own kitchen, a garden-view terrace, free Wi-Fi and free private parking.",
+  "address": "Finžgarjeva cesta 17",
+  "postalCode": "4260",
+  "city": "Bled",
+  "country": "Slovenia",
+  "latitude": 46.368664489515,
+  "longitude": 14.12162259221077,
+  "checkIn": "14:00–22:00",
+  "checkOut": "07:00–10:00",
+  "languages": [
+    "Slovenian",
+    "English",
+    "German"
+  ],
+  "bookingRating": {
+    "value": 9.1,
+    "label": "Superb",
+    "count": 72,
+    "url": "https://www.booking.com/hotel/si/apartments-olga.en-gb.html#tab-reviews",
+    "capturedAt": "2026-10-13"
+  },
+  "photos": [
+    {
+      "url": "/images/olga/100538808.jpg",
+      "alt": "The Apartments Olga garden house with its paved courtyard and covered entrance"
+    },
+    {
+      "url": "/images/olga/99044722.jpg",
+      "alt": "Covered terrace with a table and chairs outside the entrance"
+    },
+    {
+      "url": "/images/olga/880803222.jpg",
+      "alt": "Vine-shaded terrace with a table and wicker chairs beside the garden steps"
+    },
+    {
+      "url": "/images/olga/880803183.jpg",
+      "alt": "Cobbled garden path past lavender and a grapevine"
+    },
+    {
+      "url": "/images/olga/259704830.jpg",
+      "alt": "Garden with a wooden hut and fruit trees"
+    },
+    {
+      "url": "/images/olga/259704808.jpg",
+      "alt": "Garden table and chairs in the shade of the spruce"
+    },
+    {
+      "url": "/images/olga/880803135.jpg",
+      "alt": "Roses and wisteria climbing beside the house entrance"
+    },
+    {
+      "url": "/images/olga/880803336.jpg",
+      "alt": "Pink roses and hydrangeas in bloom in the garden"
+    },
+    {
+      "url": "/images/olga/880803055.jpg",
+      "alt": "Hydrangeas and roses along the white fence in the courtyard"
+    },
+    {
+      "url": "/images/olga/259704819.jpg",
+      "alt": "Wrought-iron bench with petunias in front of the house"
+    }
+  ],
+  "amenities": [
+    {
+      "icon": "parking",
+      "label": "Free private parking"
+    },
+    {
+      "icon": "kitchen",
+      "label": "Kitchen in every apartment"
+    },
+    {
+      "icon": "leaf",
+      "label": "Garden and terrace"
+    },
+    {
+      "icon": "door",
+      "label": "Private entrances"
+    },
+    {
+      "icon": "wifi",
+      "label": "Free Wi-Fi"
+    }
+  ],
+  "nearby": [
+    {
+      "name": "Restavracija Topolino",
+      "distance": "700 m"
+    },
+    {
+      "name": "Bar Lastovka",
+      "distance": "800 m"
+    },
+    {
+      "name": "Gostilna Union",
+      "distance": "800 m"
+    },
+    {
+      "name": "Lake Bled",
+      "distance": "1.3 km",
+      "major": true
+    },
+    {
+      "name": "Bled Festival Hall",
+      "distance": "1.5 km"
+    },
+    {
+      "name": "Grajska beach",
+      "distance": "1.8 km"
+    },
+    {
+      "name": "Bled Castle",
+      "distance": "2.8 km",
+      "major": true
+    },
+    {
+      "name": "Bled Island",
+      "distance": "3.3 km"
+    },
+    {
+      "name": "Vintgar Gorge",
+      "distance": "4.8 km"
+    },
+    {
+      "name": "Ljubljana Jože Pučnik Airport",
+      "distance": "33 km"
+    }
+  ],
+  "units": [
+    {
+      "id": "studio-one",
+      "bookingRoomId": "31897101",
+      "name": "Studio 1",
+      "type": "Studio",
+      "description": "A ground-floor studio with a private entrance, a dining nook with a corner bench and a sofa. The terrace outside looks onto the garden and has its own table.",
+      "setting": "Ground floor · private entrance · garden-view terrace",
+      "highlights": [
+        "Private entrance",
+        "Kitchenette with dishwasher and microwave",
+        "Dining nook"
+      ],
+      "areaSquareMetres": 25,
+      "maxGuests": 2,
+      "occupancyLabel": "Up to 2 guests",
+      "bathrooms": 1,
+      "rooms": [
+        {
+          "name": "Sleeping area",
+          "sleeps": 2,
+          "beds": "1 queen bed"
+        }
+      ],
+      "amenities": [
+        "Private bathroom with shower and hairdryer",
+        "Furnished terrace with garden view",
+        "Free Wi-Fi",
+        "TV",
+        "Heating",
+        "Bed linen and towels",
+        "Non-smoking"
+      ],
+      "photos": [
+        {
+          "url": "/images/olga/880633183.jpg",
+          "alt": "Double bed with a wrought-iron headboard against the floral wallpaper in the studio"
+        },
+        {
+          "url": "/images/olga/880633725.jpg",
+          "alt": "Kitchenette with yellow tiles, a sink and a hob"
+        },
+        {
+          "url": "/images/olga/880633661.jpg",
+          "alt": "Dining nook with a white table, a corner bench and lemon-print cushions"
+        },
+        {
+          "url": "/images/olga/880633439.jpg",
+          "alt": "White dining table with a lemon-print runner and a woven basket"
+        }
+      ]
+    },
+    {
+      "id": "studio-two",
+      "bookingRoomId": "31897105",
+      "name": "Studio 2",
+      "type": "Studio",
+      "description": "A ground-floor studio with a private entrance, a round blue table and a kitchenette under a stained-glass window. Outdoor meals happen on the furnished terrace by the garden.",
+      "setting": "Ground floor · private entrance · garden-view terrace",
+      "highlights": [
+        "Private entrance",
+        "Kitchenette with dishwasher and microwave",
+        "Seating area"
+      ],
+      "areaSquareMetres": 30,
+      "maxGuests": 2,
+      "occupancyLabel": "Up to 2 guests",
+      "bathrooms": 1,
+      "rooms": [
+        {
+          "name": "Sleeping area",
+          "sleeps": 2,
+          "beds": "1 queen bed"
+        }
+      ],
+      "amenities": [
+        "Private bathroom with shower and hairdryer",
+        "Furnished terrace with garden view",
+        "Free Wi-Fi",
+        "TV",
+        "Heating",
+        "Bed linen and towels",
+        "Non-smoking"
+      ],
+      "photos": [
+        {
+          "url": "/images/olga/880802302.jpg",
+          "alt": "Bed with a wooden headboard against the yellow wall in the second studio"
+        },
+        {
+          "url": "/images/olga/880802028.jpg",
+          "alt": "Kitchenette with a stained-glass window, a sink and a retro fridge"
+        },
+        {
+          "url": "/images/olga/880802080.jpg",
+          "alt": "Round blue table and open wardrobes in the living space"
+        },
+        {
+          "url": "/images/olga/880801951.jpg",
+          "alt": "Blue dining table and chairs beneath a lemon print"
+        },
+        {
+          "url": "/images/olga/880802487.jpg",
+          "alt": "Dining corner with a framed print and the door to the hallway"
+        }
+      ]
+    },
+    {
+      "id": "one-bedroom-apartment",
+      "bookingRoomId": "31897102",
+      "name": "One-bedroom apartment",
+      "type": "Apartment",
+      "description": "The largest option: a separate bedroom, a living room with a sofa bed, and a kitchen with a window onto the garden. Eat at the table by the yellow wall or outside on the terrace.",
+      "setting": "Ground floor · separate bedroom · garden-view terrace",
+      "highlights": [
+        "Private entrance",
+        "Separate bedroom",
+        "Kitchen with fridge, dishwasher and microwave",
+        "Sofa bed in the living room"
+      ],
+      "areaSquareMetres": 40,
+      "maxGuests": 3,
+      "occupancyLabel": "Up to 3 guests",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rooms": [
+        {
+          "name": "Bedroom",
+          "sleeps": 2,
+          "beds": "1 queen bed"
+        },
+        {
+          "name": "Living room",
+          "sleeps": 1,
+          "beds": "1 sofa bed"
+        }
+      ],
+      "amenities": [
+        "Private bathroom with shower and hairdryer",
+        "Furnished terrace with garden view",
+        "Free Wi-Fi",
+        "TV",
+        "Heating",
+        "Bed linen and towels",
+        "Non-smoking"
+      ],
+      "photos": [
+        {
+          "url": "/images/olga/880630994.jpg",
+          "alt": "Double bed with a wrought-iron frame beneath the round window"
+        },
+        {
+          "url": "/images/olga/880632443.jpg",
+          "alt": "Bedroom with two bedside tables and reading lamps"
+        },
+        {
+          "url": "/images/olga/880632823.jpg",
+          "alt": "Living area with a daybed, floral cushions and an open wardrobe"
+        },
+        {
+          "url": "/images/olga/880632740.jpg",
+          "alt": "Daybed, mirror and television in the living area"
+        },
+        {
+          "url": "/images/olga/880632506.jpg",
+          "alt": "Kitchen with colourful tiles, a sink and a window onto the garden"
+        },
+        {
+          "url": "/images/olga/880632608.jpg",
+          "alt": "Dining area with a table, a yellow feature wall and a retro fridge"
+        },
+        {
+          "url": "/images/olga/880632974.jpg",
+          "alt": "Wooden dining table against the yellow wall with framed prints"
+        },
+        {
+          "url": "/images/olga/880632913.jpg",
+          "alt": "Kitchen shelves with glasses, bowls and a kettle"
+        },
+        {
+          "url": "/images/olga/880633986.jpg",
+          "alt": "Bedroom with air conditioning, open wardrobe shelves and a window onto greenery"
+        },
+        {
+          "url": "/images/olga/880632679.jpg",
+          "alt": "Wall-mounted television, chest of drawers and a red chair by the hallway"
+        },
+        {
+          "url": "/images/olga/880634121.jpg",
+          "alt": "Framed print above floral-patterned cushions"
+        }
+      ]
+    }
+  ],
+  "narrative": {
+    "heroEyebrow": "Bled · Slovenia",
+    "heroTitle": "A garden house\non a quiet street in Bled.",
+    "heroText": "Two studios and a one-bedroom apartment, each with a private entrance, its own kitchen and a terrace onto the garden. Free parking at the house; Lake Bled is 1.3 km away.",
+    "introTitle": "A home in Bled, not a hotel room.",
+    "introText": "The rooms are bright and full of colour: painted walls, patterned tiles, framed prints. Every apartment has its own kitchen or kitchenette with a dishwasher and microwave, so breakfast can be slow and dinner can be outside.",
+    "highlights": [
+      {
+        "title": "Your own door",
+        "text": "Each apartment has a private entrance."
+      },
+      {
+        "title": "Free parking",
+        "text": "Private parking at the house, no reservation needed."
+      },
+      {
+        "title": "Your own kitchen",
+        "text": "Dishwasher, microwave and kettle in every apartment."
+      }
+    ],
+    "housePhoto": "/images/olga/880803222.jpg",
+    "heroPhotos": [
+      "/images/olga/100538808.jpg",
+      "/images/olga/880803336.jpg",
+      "/images/olga/880632608.jpg"
+    ],
+    "settingPhoto": "/images/olga/880803183.jpg",
+    "spacesTitle": "Three ways to stay.",
+    "spacesText": "Two studios for two, and a one-bedroom apartment for up to three. All on the ground floor, all with a terrace onto the garden.",
+    "settingTitle": "A quiet street, a short walk from the lake.",
+    "settingText": "Finžgarjeva cesta is a quiet residential street in Bled. Restaurants are under a kilometre away, and Lake Bled is 1.3 km from the gate.",
+    "practical": [
+      {
+        "label": "Check-in and check-out",
+        "value": "Check-in 14:00–22:00, check-out 07:00–10:00. Let the hosts know your arrival time in advance."
+      },
+      {
+        "label": "Payment",
+        "value": "Cash only."
+      },
+      {
+        "label": "Parking",
+        "value": "Free private parking at the house. No reservation needed."
+      },
+      {
+        "label": "Children and beds",
+        "value": "Children of any age are welcome. There are no extra beds; whether a cot fits depends on the apartment, so ask first."
+      },
+      {
+        "label": "Wi-Fi",
+        "value": "Free in all areas. If you need a steady connection for work, ask the hosts before you book."
+      },
+      {
+        "label": "Pets and smoking",
+        "value": "Pets are not allowed. Smoking is not allowed."
+      },
+      {
+        "label": "Languages",
+        "value": "The hosts speak Slovenian, English and German."
+      }
+    ]
+  },
+  "provenance": {
+    "source": "data/snapshots/388fb7b0e80a4ca0939b0bb027096737 (Booking.com, 2026-10-13) and references/sites/gank/apartments-olga/.data/property.json",
+    "notes": [
+      "Score, categories, house rules, coordinates, distances and booking status from the 2026-10-13 capture.",
+      "Bed types and the ground-floor/private-entrance details come from the historical curated specification; confirm with the owner.",
+      "Unit galleries hold only source-linked interior photos; garden and house photos are shared and shown separately.",
+      "Three English review texts are quoted verbatim (positive part only), without guest names or countries; republication permission is not recorded."
+    ]
+  },
+  "testimonials": [
+    {
+      "quote": "A very comfortable stay. Location is lovely in a quiet suburban street. Close walk to the supermarket, bus stops and not too far to the Lake Bled either. The kitchen had a very homey vibe, and the bedroom was great. I really enjoyed my stay here :)",
+      "date": "2026-08",
+      "source": "Booking.com",
+      "url": "https://www.booking.com/hotel/si/apartments-olga.en-gb.html#tab-reviews",
+      "reviewId": "5333574085"
+    },
+    {
+      "quote": "I loved the location and that it was very cool despite it being hot outside. Also lovely to have breakfast and dinner at different sites of the house in the shade :-)",
+      "date": "2026-07",
+      "source": "Booking.com",
+      "url": "https://www.booking.com/hotel/si/apartments-olga.en-gb.html#tab-reviews",
+      "reviewId": "5313841709"
+    },
+    {
+      "quote": "We absolutely loved this apartment! It was so cute and beautiful decorated. It was close to the centre of Bled and nearby grocery stores. It was quiet and peaceful at night. The owner was lovely and communicative. Would love to come back and stay in the future. Highly recommend!",
+      "date": "2026-07",
+      "source": "Booking.com",
+      "url": "https://www.booking.com/hotel/si/apartments-olga.en-gb.html#tab-reviews",
+      "reviewId": "5312725311"
+    }
+  ]
+}

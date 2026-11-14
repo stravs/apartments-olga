@@ -1,0 +1,102 @@
+---
+import Photo from './Photo.astro';
+import { fullAddress, type Property, type PropertyPhoto } from '../lib/property';
+import { strings, type Locale } from '../lib/i18n';
+interface Props {
+  property: Property;
+  locale: Locale;
+  /** Unit ID preselected in the form. */
+  selected?: string;
+  /** Photo printed on the postage stamp. */
+  stampPhoto?: PropertyPhoto | undefined;
+}
+const { property, locale, selected, stampPhoto } = Astro.props;
+const t = strings(locale);
+// Written on a postcard: underlined fields, no boxes.
+const field = 'w-full min-w-0 border-0 border-b-2 border-ink/25 bg-transparent px-0 py-1.5 text-base font-normal tracking-normal text-ink normal-case transition-colors focus:border-teal focus:outline-none';
+const label = 'flex min-w-0 flex-col text-xs font-bold tracking-[.14em] text-muted uppercase';
+---
+{/* The back of a postcard: message on the left, stamp and address on the right. */}
+{/* Phones: postcard header, then message, then trip details. From md: message on the left; header and details on the right. */}
+<form class="relative mx-auto grid max-w-5xl gap-8 rounded-[3px] bg-[#FFFAEE] p-6 shadow-[0_30px_60px_-30px_rgb(30_43_45/.5)] sm:p-10 md:grid-cols-[1.15fr_1fr] md:gap-0"
+  data-enquiry data-preview={t.formPreview} aria-labelledby="enquiry-title">
+  <div class="md:col-start-2 md:row-start-1 md:border-l-2 md:border-ink/15 md:pl-10">
+    <div class="flex items-start justify-between gap-6">
+      <p class="pt-2 text-xs font-bold tracking-[.3em] text-muted uppercase">{t.postcard}</p>
+      {stampPhoto && (
+        <span class="relative shrink-0 rotate-3 drop-shadow-[0_4px_6px_rgb(20_60_65/.25)]" aria-hidden="true">
+          <span class="stamp block w-24 bg-white text-[1rem]">
+            <Photo photo={stampPhoto} sizes="96px" fallbackAlt="" class="aspect-[4/5] w-full object-cover" />
+          </span>
+          {/* Postmark: wavy cancellation lines across the stamp's corner. */}
+          <svg viewBox="0 0 80 40" class="absolute -bottom-3 -left-10 w-24 text-teal/60" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M2 8c6-4 10 4 16 0s10-4 16 0 10 4 16 0 10-4 16 0 8 4 12 0M2 18c6-4 10 4 16 0s10-4 16 0 10 4 16 0 10-4 16 0 8 4 12 0M2 28c6-4 10 4 16 0s10-4 16 0 10 4 16 0 10-4 16 0 8 4 12 0" />
+          </svg>
+        </span>
+      )}
+    </div>
+    <address class="mt-6 border-b-2 border-ink/25 pb-2 not-italic leading-8">
+      <span class="soft-serif text-lg italic">{t.formTo}</span> <strong>{property.name}</strong><br />{fullAddress(property)}
+    </address>
+  </div>
+
+  <div class="flex flex-col md:col-start-1 md:row-span-2 md:row-start-1 md:pr-10">
+    <label for="enquiry-message" class="sr-only">{t.formMessage}</label>
+    {/* Ruled lines scroll with the text (background-attachment: local). */}
+    <textarea id="enquiry-message" name="message" rows="6" placeholder={t.formPlaceholder}
+      class="w-full resize-none border-0 bg-transparent bg-[linear-gradient(to_bottom,transparent_calc(2rem-2px),rgb(30_43_45/.2)_calc(2rem-2px))] bg-size-[100%_2rem] bg-local p-0 text-lg leading-8 placeholder:text-muted/70 focus:outline-none"></textarea>
+    <p class="soft-serif mt-8 text-xl italic">{t.formSign}</p>
+    <div class="mt-3 grid gap-5 sm:grid-cols-2">
+      <label class={label}>{t.formName}<input required name="name" autocomplete="name" class={field} /></label>
+      <label class={label}>{t.formEmail}<input required type="email" name="email" autocomplete="email" class={field} /></label>
+    </div>
+  </div>
+
+  <div class="flex flex-col pt-2 md:col-start-2 md:row-start-2 md:border-l-2 md:border-ink/15 md:pt-6 md:pl-10">
+    <div class="grid grid-cols-2 gap-x-5 gap-y-5">
+      <label class={label}>{t.formArrival}<input required type="date" name="arrival" class={field} /></label>
+      <label class={label}>{t.formDeparture}<input required type="date" name="departure" class={field} /></label>
+      {/* Adults and children stay separate: occupancy rules can differ for them. */}
+      <label class={label}>{t.formAdults}<select name="adults" class={field}><option>1</option><option selected>2</option><option>3</option></select></label>
+      <label class={label}>{t.formChildren}<select name="children" class={field}><option selected>0</option><option>1</option><option>2</option></select></label>
+      <label class:list={[label, 'col-span-2']}>{t.formApartment}
+        <select name="apartment" class={field}>
+          <option value="">{t.formAny}</option>
+          {property.units.map((unit) => <option value={unit.id} selected={unit.id === selected}>{unit.name}{unit.occupancyLabel && ` · ${unit.occupancyLabel}`}</option>)}
+        </select>
+      </label>
+    </div>
+    <button class="btn-primary mt-8 self-start">{t.enquire}</button>
+    <p class="mt-3 text-sm text-muted empty:hidden" role="status" data-status></p>
+  </div>
+</form>
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-enquiry]');
+  if (form) {
+    const status = form.querySelector('[data-status]');
+    const field = <T extends Element>(name: string) => form.elements.namedItem(name) as unknown as T;
+    const arrival = field<HTMLInputElement>('arrival');
+    const departure = field<HTMLInputElement>('departure');
+    // No past dates; departure at least one night after arrival.
+    const iso = (date: Date) => date.toISOString().slice(0, 10);
+    arrival.min = iso(new Date());
+    departure.min = iso(new Date(Date.now() + 864e5));
+    arrival.addEventListener('change', () => {
+      if (!arrival.value) return;
+      const next = iso(new Date(new Date(arrival.value).getTime() + 864e5));
+      departure.min = next;
+      if (departure.value && departure.value < next) departure.value = next;
+    });
+    // Buttons with data-unit="<id>" preselect their apartment and jump to the postcard.
+    document.querySelectorAll<HTMLElement>('[data-unit]').forEach((button) => button.addEventListener('click', () => {
+      field<HTMLSelectElement>('apartment').value = button.dataset.unit ?? '';
+      form.scrollIntoView({ block: 'center' });
+      field<HTMLTextAreaElement>('message').focus({ preventScroll: true });
+    }));
+    // No delivery target yet: the form never sends.
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (status) status.textContent = form.dataset.preview ?? '';
+    });
+  }
+</script>

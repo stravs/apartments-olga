@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* Olga: colours taken from the rooms — mustard walls, teal tables, lemon prints, garden roses. */
+@theme {
+  --color-paper: #FBF5E6;
+  --color-cream: #F3E8CC;
+  --color-ink: #1E2B2D;
+  --color-muted: #52605E;
+  --color-teal: #1F5F66;
+  --color-deep: #143C41;
+  --color-mustard: #E3A82F;
+  --color-lemon: #F5D867;
+  --color-rose: #B83A58;
+  --color-leaf: #46703A;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --ease-gentle: cubic-bezier(.2, .7, .2, 1);
+  /* Hero postcards drop onto the table one after another. */
+  --animate-drop: drop 1s var(--ease-gentle) both;
+  --animate-fade: fade .35s ease-out both;
+  @keyframes drop { from { translate: 0 -1.5rem; scale: 1.04; } }
+  @keyframes fade { from { opacity: 0; } }
+}
+
+/* Headings: Fraunces with the SOFT axis turned up. */
+@utility soft-serif {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 100;
+  letter-spacing: -0.015em;
+}
+
+/* One button shape everywhere; colour comes from the variant. */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold whitespace-nowrap transition duration-300 ease-gentle motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0;
+}
+@utility btn-primary {
+  @apply btn bg-teal text-white hover:bg-deep;
+}
+@utility btn-outline {
+  @apply btn border-2 border-current/40 hover:border-current hover:bg-current/5;
+}
+@utility link {
+  @apply underline decoration-current/35 decoration-2 underline-offset-4 hover:decoration-current;
+}
+/* A photo printed as a postcard: white border, soft shadow. */
+@utility postcard {
+  @apply bg-white p-2 sm:p-2.5 shadow-[0_18px_40px_-18px_rgb(30_43_45/.55)];
+}
+/* Strip of kitchen tiles in the house colours, used as a section edge. */
+@utility tiles {
+  background-image: repeating-linear-gradient(90deg,
+    var(--color-teal) 0 24px, var(--color-lemon) 24px 48px, var(--color-rose) 48px 72px,
+    var(--color-paper) 72px 96px, var(--color-leaf) 96px 120px, var(--color-mustard) 120px 144px);
+}
+
+@layer base {
+  :root { color-scheme: light; }
+  h1, h2, h3 { text-wrap: balance; }
+  :focus-visible { outline: 3px solid var(--color-teal); outline-offset: 3px; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    /* Scroll reveal: [data-reveal] rises in when it enters the viewport (Layout script).
+       Hidden only when JS runs; style="--reveal-delay:…" staggers siblings. */
+    [data-reveal] { transition: opacity .8s var(--ease-gentle), translate .8s var(--ease-gentle); transition-delay: var(--reveal-delay, 0ms); }
+    .js [data-reveal]:not(.is-visible) { opacity: 0; translate: 0 1.5rem; }
+  }
+  /* Accordion marker: plus turns into minus. */
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+}
+
+/* Postage-stamp edge: a row of punched holes round a solid centre (two mask layers). */
+@utility stamp {
+  --r: .16em;
+  padding: calc(2.2 * var(--r));
+  mask:
+    radial-gradient(var(--r), #0000 97%, #000) round calc(-1.5 * var(--r)) calc(-1.5 * var(--r)) / calc(3 * var(--r)) calc(3 * var(--r)),
+    linear-gradient(#000 0 0) no-repeat 50% / calc(100% - 3 * var(--r)) calc(100% - 3 * var(--r));
+}

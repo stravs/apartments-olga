@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import UnitCard from '../components/UnitCard.astro';
+import { getProperty } from '../lib/property';
+import { strings } from '../lib/i18n';
+
+// One 404 for the whole site (Cloudflare serves it for any missing path), so it is in English.
+const t = strings('en');
+const property = await getProperty('en');
+---
+<Layout title={`${t.notFoundTitle} | ${property.name}`} description={t.notFoundText} {property} noindex enquiry={false}>
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+    <h1 class="soft-serif text-5xl sm:text-6xl">{t.notFoundTitle}</h1>
+    <p class="mt-4 text-lg text-muted">{t.notFoundText}</p>
+    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {property.units.map((unit) => <UnitCard {unit} locale="en" />)}
+    </div>
+  </section>
+</Layout>

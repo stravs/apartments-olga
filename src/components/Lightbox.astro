@@ -1,0 +1,66 @@
+---
+import { photoUrl } from '../lib/images';
+import type { PropertyPhoto } from '../lib/property';
+import { strings, type Locale } from '../lib/i18n';
+interface Props { photos: PropertyPhoto[]; title: string; locale: Locale }
+const { photos, title, locale } = Astro.props;
+const t = strings(locale);
+const gallery = await Promise.all(photos.map(async (photo) => ({ url: await photoUrl(photo.url), alt: photo.alt ?? '' })));
+const nav = 'grid size-12 shrink-0 place-items-center rounded-full bg-white/10 text-3xl leading-none hover:bg-white/25 max-sm:absolute max-sm:top-1/2 max-sm:z-10 max-sm:-translate-y-1/2 max-sm:bg-black/35';
+---
+<!-- Opened by any button with data-photo="<index>". Focus returns to that button on close (native dialog). -->
+<dialog id="lightbox" data-photos={JSON.stringify(gallery)} data-photo-label={t.photo} aria-label={t.galleryLabel(title)}
+  class="m-0 h-dvh max-h-none w-full max-w-none bg-deep p-0 text-paper backdrop:bg-deep open:motion-safe:animate-fade">
+  <div class="flex h-full flex-col">
+    <div class="flex h-16 shrink-0 items-center justify-between gap-4 border-b border-paper/15 px-4 sm:px-6">
+      <p class="text-sm">{title} · <strong data-current>1</strong> / {gallery.length}</p>
+      <button type="button" data-close class="grid size-11 place-items-center rounded-full text-3xl leading-none hover:bg-white/10" aria-label={t.closeGallery}>×</button>
+    </div>
+    <div class="relative flex min-h-0 flex-1 items-center gap-4 px-2 pb-6 sm:px-6">
+      <button type="button" data-step="-1" class:list={[nav, 'max-sm:left-1']} aria-label={t.previousPhoto}>‹</button>
+      <figure class="flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-3 pt-4">
+        <img data-image alt="" class="max-h-[calc(100%-3rem)] max-w-full bg-white object-contain p-1.5 sm:p-2" />
+        <figcaption data-caption class="min-h-6 px-12 text-center text-sm text-paper/75"></figcaption>
+      </figure>
+      <button type="button" data-step="1" class:list={[nav, 'max-sm:right-1']} aria-label={t.nextPhoto}>›</button>
+    </div>
+  </div>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#lightbox');
+  if (dialog) {
+    const photos = JSON.parse(dialog.dataset.photos ?? '[]') as Array<{ url: string; alt: string }>;
+    const image = dialog.querySelector<HTMLImageElement>('[data-image]')!;
+    const caption = dialog.querySelector('[data-caption]')!;
+    const current = dialog.querySelector('[data-current]')!;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+    let touchX = 0;
+    const show = (next: number) => {
+      index = (next + photos.length) % photos.length;
+      const photo = photos[index]!;
+      image.src = photo.url;
+      image.alt = photo.alt || `${dialog.dataset.photoLabel} ${index + 1}`;
+      caption.textContent = photo.alt;
+      current.textContent = String(index + 1);
+      if (!reduce.matches) image.animate([{ opacity: 0, scale: .98 }, { opacity: 1, scale: 1 }], { duration: 280, easing: 'ease-out' });
+    };
+    document.querySelectorAll<HTMLElement>('[data-photo]').forEach((button) => button.addEventListener('click', () => {
+      show(Number(button.dataset.photo));
+      dialog.showModal();
+      document.documentElement.classList.add('overflow-hidden');
+    }));
+    dialog.addEventListener('close', () => document.documentElement.classList.remove('overflow-hidden'));
+    dialog.querySelectorAll<HTMLElement>('[data-step]').forEach((button) => button.addEventListener('click', () => show(index + Number(button.dataset.step))));
+    dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+    dialog.addEventListener('touchstart', (event) => { touchX = event.changedTouches[0]?.clientX ?? 0; }, { passive: true });
+    dialog.addEventListener('touchend', (event) => {
+      const distance = (event.changedTouches[0]?.clientX ?? 0) - touchX;
+      if (Math.abs(distance) > 50) show(index + (distance < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+</script>
