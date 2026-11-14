@@ -58,6 +58,8 @@ const en = {
   guestReviews: 'Guest reviews',
   nearbyTitle: 'Around the corner and a little further',
   distancesNote: 'Distances are approximate; walking routes may be longer.',
+  /** Nearby places grouped by distance: up to 1 km, 2 km, 5 km, then the rest. */
+  distanceBands: [['A short stroll', 'under 1 km'], ['Walking distance', '1–2 km'], ['A longer walk or a ride', '2–5 km'], ['Further afield', 'over 5 km']] as [string, string][],
   directions: 'Directions in Google Maps',
   mapTitle: (name: string) => `Map showing ${name}`,
   practicalTitle: 'Good to know',
@@ -152,6 +154,7 @@ const sl: Strings = {
   guestReviews: 'Mnenja gostov',
   nearbyTitle: 'Za vogalom in malo dlje',
   distancesNote: 'Razdalje so približne; peš poti so lahko daljše.',
+  distanceBands: [['Kratek sprehod', 'do 1 km'], ['Peš dosegljivo', '1–2 km'], ['Daljši sprehod ali vožnja', '2–5 km'], ['Dlje stran', 'nad 5 km']],
   directions: 'Navodila za pot v Google Zemljevidih',
   mapTitle: (name) => `Zemljevid: ${name}`,
   practicalTitle: 'Dobro je vedeti',

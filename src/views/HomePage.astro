@@ -43,6 +43,22 @@ const postcards = [
 ];
 const sizes = ['(max-width: 1024px) 70vw, 460px', '(max-width: 1024px) 36vw, 240px', '(max-width: 1024px) 32vw, 210px'];
 const tileColours = ['bg-teal text-white', 'bg-lemon', 'bg-rose text-white', 'bg-white', 'bg-leaf text-white'];
+
+// Nearby places in distance bands (up to 1, 2, 5 km, then the rest); empty bands are dropped.
+// On wide screens the cards step down, further places sitting lower.
+const metres = (distance: string) => {
+  const match = distance.match(/([\d.,]+)\s*(km|m)\b/);
+  return match ? Number(match[1]?.replace(',', '.')) * (match[2] === 'km' ? 1000 : 1) : Infinity;
+};
+const bandLimits = [-Infinity, 1000, 2000, 5000, Infinity];
+const bandColours = ['bg-teal text-white', 'bg-lemon', 'bg-rose text-white', 'bg-leaf text-white'];
+const bandSteps = ['', 'lg:mt-10', 'lg:mt-20', 'lg:mt-30'];
+const distanceBands = t.distanceBands
+  .map(([title, range], index) => ({
+    title, range, colour: bandColours[index],
+    places: (property.nearby ?? []).filter((place) => metres(place.distance) > (bandLimits[index] ?? 0) && metres(place.distance) <= (bandLimits[index + 1] ?? Infinity)),
+  }))
+  .filter((band) => band.places.length > 0);
 ---
 <Layout title={`${property.name} | ${property.city ?? t.accommodation}`} {description} image={propertyImages[0]} {jsonLd} {property}>
   <section class="px-3 sm:px-5" aria-labelledby="hero-title">
@@ -172,35 +188,46 @@ const tileColours = ['bg-teal text-white', 'bg-lemon', 'bg-rose text-white', 'bg
     </section>
   )}
 
-  <section id="location" class="mx-auto grid max-w-7xl scroll-mt-4 gap-14 px-4 py-24 sm:px-6 lg:grid-cols-2 lg:gap-20" aria-labelledby="location-title">
-    <div>
-      <h2 id="location-title" data-reveal class="soft-serif text-4xl leading-[1.05] sm:text-5xl">{story.settingTitle}</h2>
-      {story.settingText && <p data-reveal class="mt-5 text-lg text-muted">{story.settingText}</p>}
-      <address data-reveal class="mt-5 not-italic"><a href={mapsUrl(property)} target="_blank" rel="noopener noreferrer" class="link font-semibold">{fullAddress(property)}</a></address>
-      {property.nearby && (
-        <>
-          <h3 data-reveal class="mt-12 text-sm font-bold tracking-[.2em] uppercase">{t.nearbyTitle}</h3>
-          <ul class="mt-4 space-y-3">
-            {property.nearby.map((place, index) => (
-              <li data-reveal style={`--reveal-delay:${index * 40}ms`} class="flex items-baseline gap-3">
-                <span class:list={[place.major && 'soft-serif text-xl font-semibold']}>{place.name}</span>
-                <span class="flex-1 border-b-2 border-dotted border-ink/25" aria-hidden="true"></span>
-                <span class:list={['tabular-nums', place.major ? 'font-semibold' : 'text-muted']}>{place.distance}</span>
-              </li>
-            ))}
-          </ul>
-          <p class="mt-6 text-sm text-muted">{t.distancesNote}</p>
-        </>
-      )}
+  <section id="location" class="mx-auto max-w-7xl scroll-mt-4 px-4 py-24 sm:px-6" aria-labelledby="location-title">
+    <div class="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-20">
+      <h2 id="location-title" data-reveal class="soft-serif text-4xl leading-[1.05] sm:text-6xl">{story.settingTitle}</h2>
+      <div data-reveal style="--reveal-delay:100ms">
+        {story.settingText && <p class="text-lg text-muted">{story.settingText}</p>}
+        <address class="mt-4 not-italic"><a href={mapsUrl(property)} target="_blank" rel="noopener noreferrer" class="link font-semibold">{fullAddress(property)}</a></address>
+      </div>
     </div>
-    <div data-reveal style="--reveal-delay:150ms" class="relative flex flex-col gap-4 lg:pb-16">
-      <iframe class="min-h-[26rem] w-full grow rounded-[1.75rem] border-0 bg-cream lg:min-h-0" data-src={mapEmbedUrl(property, locale)} title={t.mapTitle(property.name)} referrerpolicy="no-referrer-when-downgrade" allowfullscreen data-map></iframe>
-      <a class="link self-start font-semibold lg:self-end" href={mapsUrl(property)} target="_blank" rel="noopener noreferrer">{t.directions}</a>
+
+    {distanceBands.length > 0 && (
+      <>
+        <h3 data-reveal class="mt-16 text-sm font-bold tracking-[.2em] uppercase">{t.nearbyTitle}</h3>
+        <ol class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-start">
+          {distanceBands.map((band, index) => (
+            <li data-reveal style={`--reveal-delay:${index * 90}ms`} class:list={['rounded-[1.75rem] p-6', band.colour, bandSteps[index]]}>
+              <p class="text-sm font-bold tracking-[.15em] uppercase opacity-75">{band.range}</p>
+              <h4 class="soft-serif mt-2 text-2xl leading-tight">{band.title}</h4>
+              <ul class="mt-6 space-y-3 border-t-2 border-current/20 pt-5">
+                {band.places.map((place) => (
+                  <li class="flex items-baseline justify-between gap-4">
+                    <span class:list={[place.major && 'soft-serif text-xl font-semibold']}>{place.name}</span>
+                    <span class="shrink-0 text-sm tabular-nums opacity-75">{place.distance}</span>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-6 text-sm text-muted">{t.distancesNote}</p>
+      </>
+    )}
+
+    <div data-reveal class="relative mt-20">
+      <iframe class="h-[24rem] w-full rounded-[2rem] border-0 bg-cream sm:h-[30rem]" data-src={mapEmbedUrl(property, locale)} title={t.mapTitle(property.name)} referrerpolicy="no-referrer-when-downgrade" allowfullscreen data-map></iframe>
       {settingPhoto && (
-        <div class="postcard absolute -bottom-2 -left-10 hidden w-44 -rotate-6 lg:block">
-          <Photo photo={settingPhoto} sizes="176px" class="aspect-[3/4] w-full object-cover" />
+        <div class="postcard absolute -top-10 right-6 hidden w-48 rotate-[5deg] sm:block lg:right-12 lg:w-56">
+          <Photo photo={settingPhoto} sizes="224px" class="aspect-[4/3] w-full object-cover" />
         </div>
       )}
+      <a class="link mt-4 inline-block font-semibold" href={mapsUrl(property)} target="_blank" rel="noopener noreferrer">{t.directions}</a>
     </div>
   </section>
   <script>
