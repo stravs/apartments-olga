@@ -26,3 +26,19 @@ npm run dev -- --host
 npm run build
 npm run preview -- --host
 ```
+
+## Cloudflare Workers
+
+Static assets only (`wrangler.jsonc` serves `dist`, unknown paths get `404.html`). In the Cloudflare dashboard connect `stravs/apartments-olga`:
+
+| Setting | Value |
+| --- | --- |
+| Worker name | `apartments-olga` |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Build variable | `SITE_URL` = full origin, e.g. `https://apartments-olga.<subdomain>.workers.dev` or the custom domain |
+
+The build fails on Cloudflare without `SITE_URL`, because canonical, `og:url`, JSON-LD and `llms.txt` would otherwise point to localhost. Node is pinned in `.node-version`. While `site.preview` is `true` the deployed site stays noindex with robots disallow; set it to `false` when the open items above are done.
+
+Local: `npm run deploy` (needs `wrangler login`), or `npx wrangler deploy --dry-run` after a build to check.

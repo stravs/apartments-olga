@@ -15,8 +15,13 @@ const files = (pkg, file, styles) => styles.flatMap((style) => [
   { weight: '100 900', style, unicodeRange: latinExt, src: [`@fontsource-variable/${pkg}/files/${pkg}-latin-ext-${file}-${style}.woff2`] },
 ]);
 
+// SITE_URL wins so the Cloudflare build sets the domain without editing site.json.
+const siteUrl = process.env.SITE_URL || siteConfig.url;
+// Workers Builds sets WORKERS_CI; never ship localhost canonical/og/JSON-LD URLs.
+if (process.env.WORKERS_CI && !siteUrl) throw new Error('Set SITE_URL in Cloudflare: Settings → Build → Variables and secrets.');
+
 export default defineConfig({
-  site: siteConfig.url ?? process.env.SITE_URL ?? 'http://localhost:4321',
+  site: siteUrl ?? 'http://localhost:4321',
   output: 'static',
   trailingSlash: 'always',
   integrations: siteConfig.preview ? [] : [sitemap({ i18n: { defaultLocale: 'en', locales: { en: 'en', sl: 'sl' } } })],
