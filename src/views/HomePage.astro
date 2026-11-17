@@ -79,7 +79,7 @@ const distanceBands = t.distanceBands
             </a>
           )}
         </div>
-        <div class="relative order-first aspect-[1/.95] w-full max-w-xl justify-self-center lg:order-none lg:justify-self-end" aria-hidden="true">
+        <div class="relative isolate order-first aspect-[1/.95] w-full max-w-xl justify-self-center lg:order-none lg:justify-self-end" aria-hidden="true">
           {heroPhotos.map((photo, index) => (
             <div class:list={['postcard absolute rounded-[3px] bg-[#FFFAEE] motion-safe:animate-drop', postcards[index]]}>
               <Photo {photo} sizes={sizes[index] ?? '30vw'} eager={index === 0} fallbackAlt="" class:list={['w-full object-cover', index === 0 ? 'aspect-[3/2]' : 'aspect-[3/4]']} />

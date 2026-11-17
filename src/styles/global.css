@@ -44,7 +44,7 @@
 }
 /* A photo printed as a postcard: white border, soft shadow. */
 @utility postcard {
-  @apply bg-white p-2 sm:p-2.5 shadow-[0_18px_40px_-18px_rgb(30_43_45/.55)];
+  @apply bg-white p-1 sm:p-2.5 shadow-[0_18px_40px_-18px_rgb(30_43_45/.55)];
 }
 /* Strip of kitchen tiles in the house colours, used as a section edge. */
 @utility tiles {
