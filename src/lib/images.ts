@@ -12,5 +12,5 @@ export function photoSource(url: string): ImageMetadata {
 
 /** Full-size optimised URL, for places that need a plain link (lightbox, metadata). */
 export async function photoUrl(url: string): Promise<string> {
-  return (await getImage({ src: photoSource(url), format: 'webp' })).src;
+  return (await getImage({ src: photoSource(url), format: 'webp', quality: 90 })).src;
 }

@@ -14,7 +14,7 @@ interface Props {
 }
 const { photo, sizes, fallbackAlt, eager = false, class: className } = Astro.props;
 const src = photoSource(photo.url);
-// Booking photos are at most 1024px wide; steps below that serve phones a lighter file.
-const widths = [...[360, 480, 768].filter((w) => w < src.width), src.width];
+// Serve high-density screens without making phones download the full-size source.
+const widths = [...[360, 480, 768, 1024, 1440, 1920].filter((w) => w < src.width), src.width];
 ---
-<Image {src} {widths} {sizes} alt={fallbackAlt === '' ? '' : photo.alt ?? fallbackAlt ?? ''} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" class={className} />
+<Image {src} {widths} {sizes} format="webp" quality={85} alt={fallbackAlt === '' ? '' : photo.alt ?? fallbackAlt ?? ''} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" class={className} />
