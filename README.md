@@ -8,7 +8,7 @@ Features carried over from `rose-in-winter` and `apartments-bassanese`: apartmen
 
 - `.data/property.json` and `.data/property.sl.json` (Slovenian holds translated fields only).
 - `.data/site.json`: `site.preview: true` → noindex, robots disallow, no sitemap. Set `site.url` (or `SITE_URL`) before publishing.
-- Photos: 31 higher-resolution versions of the same captured Booking photo IDs (up to 3000px), with unchanged gallery assignments. Responsive WebP uses quality 85; full-size lightbox images use quality 90. Local download provenance: `data/runs/apartments-olga/photo-upgrade.json` at the Izba root.
+- Photos: 31 higher-resolution versions of the same captured Booking photo IDs (up to 3000px), with unchanged gallery assignments. `880633183.jpg` (Studio 2 cover) is straightened by 3° and cropped to 1152×1536. Responsive WebP uses quality 85; full-size lightbox images use quality 90. Local download provenance: `data/runs/apartments-olga/photo-upgrade.json` at the Izba root.
 - Sources: Booking capture `data/snapshots/388fb7b0e80a4ca0939b0bb027096737` (13 Oct 2026) and the historical spec. See `provenance` in `property.json`.
 
 ## Open items before publishing
