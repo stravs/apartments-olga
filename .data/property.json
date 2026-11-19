@@ -8,7 +8,7 @@
   "country": "Slovenia",
   "latitude": 46.368664489515,
   "longitude": 14.12162259221077,
-  "checkIn": "14:00–22:00",
+  "checkIn": "from 14:00",
   "checkOut": "07:00–10:00",
   "languages": [
     "Slovenian",
@@ -129,8 +129,63 @@
   "units": [
     {
       "id": "studio-one",
-      "bookingRoomId": "31897101",
+      "bookingRoomId": "31897105",
       "name": "Studio 1",
+      "type": "Studio",
+      "description": "A ground-floor studio with a private entrance, a round blue table and a kitchenette under a stained-glass window. Outdoor meals happen on the furnished terrace by the garden.",
+      "setting": "Ground floor · private entrance · garden-view terrace",
+      "highlights": [
+        "Private entrance",
+        "Kitchenette with dishwasher and microwave",
+        "Seating area"
+      ],
+      "areaSquareMetres": 30,
+      "maxGuests": 2,
+      "occupancyLabel": "Up to 2 guests",
+      "bathrooms": 1,
+      "rooms": [
+        {
+          "name": "Sleeping area",
+          "sleeps": 2,
+          "beds": "1 queen bed"
+        }
+      ],
+      "amenities": [
+        "Private bathroom with shower and hairdryer",
+        "Furnished terrace with garden view",
+        "Free Wi-Fi",
+        "TV",
+        "Heating",
+        "Bed linen and towels",
+        "Non-smoking"
+      ],
+      "photos": [
+        {
+          "url": "/images/olga/880802302.jpg",
+          "alt": "Bed with a wooden headboard against the yellow wall in the studio"
+        },
+        {
+          "url": "/images/olga/880802028.jpg",
+          "alt": "Kitchenette with a stained-glass window, a sink and a retro fridge"
+        },
+        {
+          "url": "/images/olga/880802080.jpg",
+          "alt": "Round blue table and open wardrobes in the living space"
+        },
+        {
+          "url": "/images/olga/880801951.jpg",
+          "alt": "Blue dining table and chairs beneath a lemon print"
+        },
+        {
+          "url": "/images/olga/880802487.jpg",
+          "alt": "Dining corner with a framed print and the door to the hallway"
+        }
+      ]
+    },
+    {
+      "id": "studio-two",
+      "bookingRoomId": "31897101",
+      "name": "Studio 2",
       "type": "Studio",
       "description": "A ground-floor studio with a private entrance, a dining nook with a corner bench and a sofa. The terrace outside looks onto the garden and has its own table.",
       "setting": "Ground floor · private entrance · garden-view terrace",
@@ -139,7 +194,7 @@
         "Kitchenette with dishwasher and microwave",
         "Dining nook"
       ],
-      "areaSquareMetres": 25,
+      "areaSquareMetres": 30,
       "maxGuests": 2,
       "occupancyLabel": "Up to 2 guests",
       "bathrooms": 1,
@@ -175,61 +230,6 @@
         {
           "url": "/images/olga/880633439.jpg",
           "alt": "White dining table with a lemon-print runner and a woven basket"
-        }
-      ]
-    },
-    {
-      "id": "studio-two",
-      "bookingRoomId": "31897105",
-      "name": "Studio 2",
-      "type": "Studio",
-      "description": "A ground-floor studio with a private entrance, a round blue table and a kitchenette under a stained-glass window. Outdoor meals happen on the furnished terrace by the garden.",
-      "setting": "Ground floor · private entrance · garden-view terrace",
-      "highlights": [
-        "Private entrance",
-        "Kitchenette with dishwasher and microwave",
-        "Seating area"
-      ],
-      "areaSquareMetres": 30,
-      "maxGuests": 2,
-      "occupancyLabel": "Up to 2 guests",
-      "bathrooms": 1,
-      "rooms": [
-        {
-          "name": "Sleeping area",
-          "sleeps": 2,
-          "beds": "1 queen bed"
-        }
-      ],
-      "amenities": [
-        "Private bathroom with shower and hairdryer",
-        "Furnished terrace with garden view",
-        "Free Wi-Fi",
-        "TV",
-        "Heating",
-        "Bed linen and towels",
-        "Non-smoking"
-      ],
-      "photos": [
-        {
-          "url": "/images/olga/880802302.jpg",
-          "alt": "Bed with a wooden headboard against the yellow wall in the second studio"
-        },
-        {
-          "url": "/images/olga/880802028.jpg",
-          "alt": "Kitchenette with a stained-glass window, a sink and a retro fridge"
-        },
-        {
-          "url": "/images/olga/880802080.jpg",
-          "alt": "Round blue table and open wardrobes in the living space"
-        },
-        {
-          "url": "/images/olga/880801951.jpg",
-          "alt": "Blue dining table and chairs beneath a lemon print"
-        },
-        {
-          "url": "/images/olga/880802487.jpg",
-          "alt": "Dining corner with a framed print and the door to the hallway"
         }
       ]
     },
@@ -354,11 +354,11 @@
     "practical": [
       {
         "label": "Check-in and check-out",
-        "value": "Check-in 14:00–22:00, check-out 07:00–10:00. Let the hosts know your arrival time in advance."
+        "value": "Self check-in any time from 14:00. Check-out 07:00–10:00."
       },
       {
         "label": "Payment",
-        "value": "Cash only."
+        "value": "Cash, PayPal or bank transfer. No card payments."
       },
       {
         "label": "Parking",
@@ -388,7 +388,8 @@
       "Score, categories, house rules, coordinates, distances and booking status from the 2026-10-13 capture.",
       "Bed types and the ground-floor/private-entrance details come from the historical curated specification; confirm with the owner.",
       "Unit galleries hold only source-linked interior photos; garden and house photos are shared and shown separately.",
-      "Three English review texts are quoted verbatim (positive part only), without guest names or countries; republication permission is not recorded."
+      "Three English review texts are quoted verbatim (positive part only), without guest names or countries; republication permission is not recorded.",
+      "Owner feedback (2026-11-19): Studio 1 and Studio 2 names were swapped relative to Booking; both studios are 30 m²; self check-in any time from 14:00; payment by cash, PayPal or bank transfer, no cards."
     ]
   },
   "testimonials": [

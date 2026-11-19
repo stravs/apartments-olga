@@ -43,7 +43,7 @@ export function lodgingBusiness(property: Property, homeUrl: string, images: str
     checkinTime: time(property.checkIn, 'first'),
     checkoutTime: time(property.checkOut, 'last'),
     knowsLanguage: property.languages,
-    paymentAccepted: 'Cash',
+    paymentAccepted: 'Cash, PayPal, Bank transfer',
     petsAllowed: false,
     amenityFeature: features(property.amenities.map((amenity) => amenity.label)),
     containsPlace: units,

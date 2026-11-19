@@ -77,7 +77,7 @@ export type Property = {
   };
 };
 
-type Translation = Partial<Pick<Property, 'description' | 'country' | 'languages' | 'amenities' | 'nearby' | 'bookingRating' | 'testimonials'>> & {
+type Translation = Partial<Pick<Property, 'description' | 'checkIn' | 'country' | 'languages' | 'amenities' | 'nearby' | 'bookingRating' | 'testimonials'>> & {
   narrative?: Partial<Property['narrative']>;
   units?: Record<string, Partial<Pick<PropertyUnit, 'name' | 'description' | 'setting' | 'highlights' | 'amenities' | 'occupancyLabel' | 'rooms'>>>;
   /** English alt text → translated alt text. */

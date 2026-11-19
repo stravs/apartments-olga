@@ -1,4 +1,5 @@
 {
+  "checkIn": "od 14:00",
   "description": "Dva studia in apartma z eno spalnico v hiši z vrtom na mirni ulici na Bledu. Vsak ima svojo kuhinjo, teraso s pogledom na vrt, brezplačen Wi-Fi in brezplačno zasebno parkirišče.",
   "country": "Slovenija",
   "languages": [
@@ -102,11 +103,11 @@
     "practical": [
       {
         "label": "Prihod in odhod",
-        "value": "Prijava 14:00–22:00, odjava 07:00–10:00. Vnaprej nam sporočite, kdaj boste prispeli."
+        "value": "Samostojna prijava kadar koli od 14:00. Odjava 07:00–10:00."
       },
       {
         "label": "Plačilo",
-        "value": "Samo gotovina."
+        "value": "Gotovina, PayPal ali bančno nakazilo. Plačilo s kartico ni mogoče."
       },
       {
         "label": "Parkiranje",
@@ -133,12 +134,12 @@
   "units": {
     "studio-one": {
       "name": "Studio 1",
-      "description": "Studio v pritličju z ločenim vhodom, jedilnim kotičkom s kotno klopjo in kavčem. Terasa pred vrati gleda na vrt in ima svojo mizo.",
+      "description": "Studio v pritličju z ločenim vhodom, okroglo modro mizo in čajno kuhinjo pod oknom iz barvnega stekla. Obroki na prostem so na opremljeni terasi ob vrtu.",
       "setting": "Pritličje · ločen vhod · terasa s pogledom na vrt",
       "highlights": [
         "Ločen vhod",
         "Čajna kuhinja s pomivalnim strojem in mikrovalovno pečico",
-        "Jedilni kotiček"
+        "Prostor za sedenje"
       ],
       "occupancyLabel": "Do 2 osebi",
       "rooms": [
@@ -193,12 +194,12 @@
     },
     "studio-two": {
       "name": "Studio 2",
-      "description": "Studio v pritličju z ločenim vhodom, okroglo modro mizo in čajno kuhinjo pod oknom iz barvnega stekla. Obroki na prostem so na opremljeni terasi ob vrtu.",
+      "description": "Studio v pritličju z ločenim vhodom, jedilnim kotičkom s kotno klopjo in kavčem. Terasa pred vrati gleda na vrt in ima svojo mizo.",
       "setting": "Pritličje · ločen vhod · terasa s pogledom na vrt",
       "highlights": [
         "Ločen vhod",
         "Čajna kuhinja s pomivalnim strojem in mikrovalovno pečico",
-        "Prostor za sedenje"
+        "Jedilni kotiček"
       ],
       "occupancyLabel": "Do 2 osebi",
       "rooms": [
@@ -220,7 +221,7 @@
     }
   },
   "photoAlts": {
-    "Bed with a wooden headboard against the yellow wall in the second studio": "Postelja z lesenim vzglavjem ob rumeni steni v drugem studiu",
+    "Bed with a wooden headboard against the yellow wall in the studio": "Postelja z lesenim vzglavjem ob rumeni steni v studiu",
     "Bedroom with air conditioning, open wardrobe shelves and a window onto greenery": "Spalnica s klimatsko napravo, odprtimi policami in oknom v zelenje",
     "Bedroom with two bedside tables and reading lamps": "Spalnica z dvema nočnima omaricama in lučkama za branje",
     "Blue dining table and chairs beneath a lemon print": "Modra jedilna miza in stoli pod sliko z limonami",
